@@ -1,4 +1,4 @@
-package com.example.nickelffoxassignments_sheenu.java;
+package com.example.nickelffoxassignments_sheenu.java.multithreading;
 
 class counter{
     int count;

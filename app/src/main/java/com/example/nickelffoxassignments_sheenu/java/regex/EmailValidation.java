@@ -1,4 +1,4 @@
-package com.example.nickelffoxassignments_sheenu.java;
+package com.example.nickelffoxassignments_sheenu.java.regex;
 
 
 import java.util.Scanner;

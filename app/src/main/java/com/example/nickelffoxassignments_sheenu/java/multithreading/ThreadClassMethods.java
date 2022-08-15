@@ -1,6 +1,4 @@
-package com.example.nickelffoxassignments_sheenu.java;
-
-import com.example.nickelffoxassignments_sheenu.MainActivity;
+package com.example.nickelffoxassignments_sheenu.java.multithreading;
 
 class ThreadM1 extends Thread{
     @Override
