@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1049548032693",
+    "project_id": "nickelffoxassignments-sh-1e76d",
+    "storage_bucket": "nickelffoxassignments-sh-1e76d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1049548032693:android:6112f726218376297c8cfc",
+        "android_client_info": {
+          "package_name": "com.example.nickelffoxassignments_sheenu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1049548032693-3c8hgc493bsovu5jg7q9c4uolg11c9a2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzmbgKg6DGJE5Vq2RqTkR0kg3SzgewwBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1049548032693-3c8hgc493bsovu5jg7q9c4uolg11c9a2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
