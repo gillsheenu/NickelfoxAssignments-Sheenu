@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.example.nickelffoxassignments_sheenu.MainActivity
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
@@ -19,7 +20,11 @@ import kotlinx.coroutines.withContext
 
 abstract class MainBaseFragment : Fragment()/*Fragments_interface*/{
     var baseActivity: MainActivity? =null
+
+companion object{
     lateinit var firebaseAuth: FirebaseAuth
+}
+
 
 
     var providers= arrayListOf<AuthUI.IdpConfig>(
@@ -62,6 +67,7 @@ abstract class MainBaseFragment : Fragment()/*Fragments_interface*/{
         }
 
     }
+
 
 //    override fun onStart() {
 //        super.onStart()

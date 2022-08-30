@@ -16,8 +16,8 @@ class NewsFragment : MainBaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         var view=inflater.inflate(R.layout.fragment_news, container, false)
-        requireActivity().window.statusBarColor= ContextCompat.getColor(requireContext(),R.color.news_color)
-        baseActivity?.supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#CAC7")))
+//        requireActivity().window.statusBarColor= ContextCompat.getColor(requireContext(),R.color.news_color)
+//        baseActivity?.supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#CAC7")))
 
         return view
     }

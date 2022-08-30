@@ -16,8 +16,8 @@ class CalculatorFragment : MainBaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        requireActivity().window.statusBarColor=ContextCompat.getColor(requireContext(),R.color.calculator_color)
-        baseActivity?.supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#D79A9A")))
+//        requireActivity().window.statusBarColor=ContextCompat.getColor(requireContext(),R.color.calculator_color)
+//        baseActivity?.supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#D79A9A")))
         return inflater.inflate(R.layout.fragment_calculator, container, false)
     }
 

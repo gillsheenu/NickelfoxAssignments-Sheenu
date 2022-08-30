@@ -41,6 +41,7 @@ class MainFragment : MainBaseFragment() {
 
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
                 updateBgColor()
+                statusBarColor()
 
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
             }
@@ -52,6 +53,7 @@ class MainFragment : MainBaseFragment() {
 
             override fun onPageScrollStateChanged(state: Int) {
                 updateBgColor()
+                statusBarColor()
                 super.onPageScrollStateChanged(state)
             }
         })
@@ -61,6 +63,21 @@ class MainFragment : MainBaseFragment() {
         return view
     }
 
+    private fun statusBarColor() {
+        when(viewPager.currentItem){
+            0->setColor(R.color.calculator_color)
+            1->setColor(R.color.stopWatch_color)
+            2->setColor(R.color.news_color)
+            3->setColor(R.color.musicPlayer_color)
+            else->setColor(R.color.colorPrimary)
+        }
+    }
+
+    private fun setColor(mcolor:Int) {
+        requireActivity().window.statusBarColor=ContextCompat.getColor(requireContext(),mcolor)
+        baseActivity?.supportActionBar?.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(),mcolor))
+
+    }
 
 
     private fun updateBgColor() {

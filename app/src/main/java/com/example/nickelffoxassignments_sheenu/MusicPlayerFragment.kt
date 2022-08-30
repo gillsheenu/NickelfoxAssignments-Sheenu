@@ -16,8 +16,8 @@ class MusicPlayerFragment : MainBaseFragment(){
 
         var view=inflater.inflate(R.layout.fragment_music_player, container, false)
 
-        requireActivity().window.statusBarColor= ContextCompat.getColor(requireContext(),R.color.musicPlayer_color)
-        baseActivity?.supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#DBDB70")))
+//        requireActivity().window.statusBarColor= ContextCompat.getColor(requireContext(),R.color.musicPlayer_color)
+//        baseActivity?.supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#DBDB70")))
         return view
     }
 

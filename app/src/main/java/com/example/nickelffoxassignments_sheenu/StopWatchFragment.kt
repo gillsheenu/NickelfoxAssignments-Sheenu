@@ -13,8 +13,8 @@ class StopWatchFragment :MainBaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view=inflater.inflate(R.layout.fragment_stop_watch, container, false)
-        requireActivity().window.statusBarColor= ContextCompat.getColor(requireContext(),R.color.stopWatch_color)
-        baseActivity?.supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#8B864E")))
+//        requireActivity().window.statusBarColor= ContextCompat.getColor(requireContext(),R.color.stopWatch_color)
+//        baseActivity?.supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#8B864E")))
         return view
     }
 

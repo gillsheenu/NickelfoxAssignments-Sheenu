@@ -8,8 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="colorPrimary">#068481</color>
-    <color name="colorPrimaryDark">#457371</color>
+    <color name="colorPrimary">#1299BB</color>
+    <color name="colorPrimaryDark">#116F99</color>
     <color name="colorAccent">#E91E63</color>
     <color name="editBg">#DFECEC</color>
     <color name="bordercolor">#1D666768</color>
