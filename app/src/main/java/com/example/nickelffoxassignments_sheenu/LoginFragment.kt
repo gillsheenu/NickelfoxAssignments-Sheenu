@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.*
@@ -22,10 +23,12 @@ class LoginFragment : MainBaseFragment() {
     lateinit var logInBtn: Button
     lateinit var signUpLink: TextView
     lateinit var optionsLink:TextView
+    lateinit var nSignInViewModel: SignInViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         var view=inflater.inflate(R.layout.fragment_login, container, false)
+        nSignInViewModel=ViewModelProvider(this@LoginFragment).get(SignInViewModel::class.java)
 
         initalizeUI(view)
         signUpLink.setOnClickListener {
@@ -58,7 +61,7 @@ class LoginFragment : MainBaseFragment() {
             Toast.makeText(context,"Field can't be empty", Toast.LENGTH_SHORT).show()
         }
         withContext(Dispatchers.Main){
-            firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+            nSignInViewModel.firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
                 if (it.isSuccessful) {
                     findNavController().navigate(R.id.action_loginFragment2_to_mainFragment)
                     Toast.makeText(context, "user registered", Toast.LENGTH_SHORT).show()

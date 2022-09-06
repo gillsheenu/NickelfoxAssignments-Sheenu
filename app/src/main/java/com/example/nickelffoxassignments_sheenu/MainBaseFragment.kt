@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.nickelffoxassignments_sheenu.MainActivity
 import com.firebase.ui.auth.AuthUI
@@ -20,12 +21,6 @@ import kotlinx.coroutines.withContext
 
 abstract class MainBaseFragment : Fragment()/*Fragments_interface*/{
     var baseActivity: MainActivity? =null
-
-companion object{
-    lateinit var firebaseAuth: FirebaseAuth
-}
-
-
 
     var providers= arrayListOf<AuthUI.IdpConfig>(
         AuthUI.IdpConfig.EmailBuilder().build(),
@@ -40,8 +35,11 @@ companion object{
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
        var view =inflater.inflate(R.layout.fragment_main_base, container, false)
 
-        firebaseAuth=FirebaseAuth.getInstance()
         return view
+    }
+
+    override fun onStart() {
+        super.onStart()
     }
     var signUpLauncher=registerForActivityResult(FirebaseAuthUIActivityResultContract()){
         this.onSignUpResult(it)

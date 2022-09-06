@@ -17,6 +17,7 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
@@ -30,18 +31,18 @@ import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
     lateinit var navigationView: NavigationView
-    lateinit var firebaseAuth: FirebaseAuth
     lateinit var navController: NavController
     lateinit var mWindow: Window
     lateinit var drawerlayout: DrawerLayout
     var setItemEnabled: Boolean = true
     var setColorEnabled: Boolean = false
-
+    lateinit var signInViewModel:SignInViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        signInViewModel=ViewModelProvider(this).get(SignInViewModel::class.java)
         setUpViews()
         setupNavigationDrawer()
         setUpNavigationview()
@@ -63,6 +64,16 @@ class MainActivity : AppCompatActivity() {
             ) {
 
                 if (destination.id == R.id.registrationFragment) {
+//                    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+                    navigationView.menu.findItem(R.id.menu_logout).setEnabled(false)
+                    setItemEnabled = false
+                    invalidateOptionsMenu()
+                } else {
+                    setItemEnabled = true
+                    invalidateOptionsMenu()
+                }
+                if(destination.id==R.id.loginFragment2){
+                    supportActionBar?.setDisplayHomeAsUpEnabled(false)
                     setItemEnabled = false
                     invalidateOptionsMenu()
                 } else {
@@ -70,29 +81,35 @@ class MainActivity : AppCompatActivity() {
                     invalidateOptionsMenu()
                 }
 
-                if (destination.id == R.id.calculatorFragment) {
+                if(destination.id==R.id.mainFragment){
+                    supportActionBar?.setDisplayHomeAsUpEnabled(false)
+                } else if (destination.id == R.id.calculatorFragment) {
 
                     setColorEnabled = true
                     setAppBarColor(R.color.calculator_color)
+                    supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 } else if (destination.id == R.id.stopWatchFragment) {
                     setColorEnabled = true
                     setAppBarColor(R.color.stopWatch_color)
+                    supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 } else if (destination.id == R.id.newsFragment) {
                     setColorEnabled = true
                     setAppBarColor(R.color.news_color)
+                    supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 } else if (destination.id == R.id.musicPlayerFragment) {
                     setColorEnabled = true
                     setAppBarColor(R.color.musicPlayer_color)
+                    supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 } else {
                     setColorEnabled = false
                     setAppBarColor(R.color.colorPrimary)
+//                    supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 }
             }
         })
     }
 
     private fun setUpViews() {
-        firebaseAuth = FirebaseAuth.getInstance()
         var navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navigationView = findViewById(R.id.navigationView)
@@ -118,6 +135,9 @@ class MainActivity : AppCompatActivity() {
 
         navigationView.setupWithNavController(navController)
         NavigationUI.setupActionBarWithNavController(this, navController, drawerlayout)
+//        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+//        supportActionBar?.setDisplayShowHomeEnabled(false)
+
 
     }
 
@@ -127,7 +147,7 @@ class MainActivity : AppCompatActivity() {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
                 when (item.itemId) {
                     R.id.menu_logout -> {
-                        firebaseAuth.signOut()
+                        signInViewModel.logout()
                         navController.navigate(R.id.loginFragment2)
                     }
                 }
@@ -159,6 +179,7 @@ class MainActivity : AppCompatActivity() {
 
         when (item.itemId) {
             R.id.menu_logout -> {
+                signInViewModel.logout()
                 navController.navigate(R.id.loginFragment2)
             }
         }
