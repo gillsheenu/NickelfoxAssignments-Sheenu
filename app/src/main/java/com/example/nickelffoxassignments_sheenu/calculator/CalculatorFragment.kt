@@ -1,16 +1,13 @@
-package com.example.nickelffoxassignments_sheenu
+package com.example.nickelffoxassignments_sheenu.calculator
 
-import android.annotation.SuppressLint
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.widget.TextView
-import androidx.core.content.ContextCompat
+import android.widget.Toast
+import com.example.nickelffoxassignments_sheenu.R
 
 class CalculatorFragment : Fragment() {
 
@@ -38,7 +35,7 @@ class CalculatorFragment : Fragment() {
     lateinit var tvEquals: TextView
     lateinit var expression :String
     var isPressed=false
-    var isNumber=true
+    var isNumber=false
     var inputValue1=""
     var input=0.0
     var result=0.0
@@ -104,6 +101,12 @@ class CalculatorFragment : Fragment() {
             setInput("00")
         }
         tvClear.setOnClickListener {
+
+//            if(isNumber==true){
+//                inputValue1.subSequence(0,inputValue1.length-1)
+//            }else{
+//                operators.removeAt(tvInput.length()-1)
+//            }
             if(tvInput.length()>0){
                 tvInput.text=tvInput.text.subSequence(0,tvInput.length()-1)
             }
@@ -147,13 +150,18 @@ class CalculatorFragment : Fragment() {
                 input=0.0
                 isPressed=false
             }else{
-                operands.add(inputValue1.toDouble())
-                inputValue1 = ""
-                input= performCalculation(expression)
-                tvOutput.text=input.toString()
-                operands.clear()
-                operators.clear()
-                isPressed=true
+                if(inputValue1!=""){
+                    operands.add(inputValue1.toDouble())
+                    inputValue1 = ""
+                    input= performCalculation(expression)
+                    tvOutput.text=input.toString()
+                    operands.clear()
+                    operators.clear()
+                    isPressed=true
+                }else{
+                    Toast.makeText(context,"Add value",Toast.LENGTH_SHORT).show()
+                }
+
             }
 
         }
@@ -285,6 +293,7 @@ class CalculatorFragment : Fragment() {
                     operators.removeAt(i)
                 } else if (operands.first() == operands[i]) {
                     var result = operands[i].minus(operands[i+1])
+
                     operands[i] = result
                     operands.removeAt(i + 1)
                     operators.removeAt(i)
@@ -303,20 +312,48 @@ class CalculatorFragment : Fragment() {
 
 
     private fun setInput(pos: String) {
-        isPressed=false
-        expression = tvInput.text.toString()
-        expression = expression + pos
-        tvInput.text = expression
-        if (isNumber==true) {
-            inputValue1 = inputValue1 + pos
-        } else {
-            operands.add(inputValue1.toDouble())
-            inputValue1 = ""
-            if (pos == "+" || pos == "*" || pos == "-" || pos == "/") {
-                operators.add(pos)
+
+        if(isPressed==true){
+            if(isNumber==false){
+                expression = tvInput.text.toString()
+                expression = expression + pos
+                tvInput.text = expression
+                operands.add(input)
+                if (pos == "+" || pos == "*" || pos == "-" || pos == "/") {
+                    operators.add(pos)
+                    isPressed=false
+
+                }
+
+            }else{
+                Toast.makeText(context,"Add operator",Toast.LENGTH_SHORT).show()
+            }
+
+        }else{
+
+            if (isNumber==true) {
+                expression = tvInput.text.toString()
+                expression = expression + pos
+                tvInput.text = expression
+                inputValue1 = inputValue1 + pos
+            } else {
+                if(inputValue1!=""){
+                    expression = tvInput.text.toString()
+                    expression = expression + pos
+                    tvInput.text = expression
+                    operands.add(inputValue1.toDouble())
+                    inputValue1 = ""
+                    if (pos == "+" || pos == "*" || pos == "-" || pos == "/") {
+                        operators.add(pos)
+
+                    }
+                }else{
+                    Toast.makeText(context,"Add values",Toast.LENGTH_SHORT).show()
+                }
 
             }
         }
+
     }
 
 

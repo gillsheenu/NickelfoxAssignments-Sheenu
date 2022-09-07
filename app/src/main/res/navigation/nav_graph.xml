@@ -64,7 +64,7 @@
         tools:layout="@layout/fragment_stop_watch" />
     <fragment
         android:id="@+id/calculatorFragment"
-        android:name="com.example.nickelffoxassignments_sheenu.CalculatorFragment"
+        android:name="com.example.nickelffoxassignments_sheenu.calculator.CalculatorFragment"
         android:label="Calculator"
         tools:layout="@layout/fragment_calculator" />
     <fragment
