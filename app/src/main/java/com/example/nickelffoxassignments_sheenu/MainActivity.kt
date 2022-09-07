@@ -17,14 +17,15 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
+import androidx.navigation.*
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.example.nickelffoxassignments_sheenu.Auth.AuthViewModel
+import com.example.nickelffoxassignments_sheenu.Auth.AuthViewModelFactory
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import kotlin.properties.Delegates
@@ -36,17 +37,26 @@ class MainActivity : AppCompatActivity() {
     lateinit var drawerlayout: DrawerLayout
     var setItemEnabled: Boolean = true
     var setColorEnabled: Boolean = false
-    lateinit var signInViewModel:SignInViewModel
+    lateinit var authViewModel: AuthViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        signInViewModel=ViewModelProvider(this).get(SignInViewModel::class.java)
+        authViewModel=ViewModelProvider(this@MainActivity,AuthViewModelFactory(application)).get(AuthViewModel::class.java)
         setUpViews()
         setupNavigationDrawer()
         setUpNavigationview()
         setUpFeatures()
+
+        authViewModel.statusMutableLiveData.observe(this, Observer {
+            if(true){
+
+                navController.popBackStack()
+
+                navController.navigate(R.id.loginFragment2)
+            }
+        })
 
 //        testCrash=findViewById(R.id.btnTestCrash)
 //        testCrash.setOnClickListener {
@@ -147,8 +157,7 @@ class MainActivity : AppCompatActivity() {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
                 when (item.itemId) {
                     R.id.menu_logout -> {
-                        signInViewModel.logout()
-                        navController.navigate(R.id.loginFragment2)
+                        authViewModel.logout()
                     }
                 }
                 return true
@@ -179,8 +188,7 @@ class MainActivity : AppCompatActivity() {
 
         when (item.itemId) {
             R.id.menu_logout -> {
-                signInViewModel.logout()
-                navController.navigate(R.id.loginFragment2)
+                authViewModel.logout()
             }
         }
         return super.onOptionsItemSelected(item)

@@ -12,7 +12,7 @@ import android.view.Window
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 
-class CalculatorFragment : MainBaseFragment() {
+class CalculatorFragment : Fragment() {
 
     lateinit var tvOne: TextView
     lateinit var tvTwo: TextView

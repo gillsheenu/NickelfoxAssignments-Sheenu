@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 
-class StopWatchFragment :MainBaseFragment() {
+class StopWatchFragment :Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view=inflater.inflate(R.layout.fragment_stop_watch, container, false)

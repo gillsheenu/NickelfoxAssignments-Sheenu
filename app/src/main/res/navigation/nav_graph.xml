@@ -7,14 +7,13 @@
 
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.example.nickelffoxassignments_sheenu.RegistrationFragment"
+        android:name="com.example.nickelffoxassignments_sheenu.Auth.RegistrationFragment"
         android:label="Registration"
         tools:layout="@layout/fragment_registration" >
         <action
             android:id="@+id/action_registrationFragment_to_loginFragment2"
             app:destination="@id/loginFragment2"
-            app:popUpTo="@id/registrationFragment"
-            app:popUpToInclusive="true" />
+             />
         <action
             android:id="@+id/action_registrationFragment_to_mainFragment"
             app:destination="@id/mainFragment"
@@ -23,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment2"
-        android:name="com.example.nickelffoxassignments_sheenu.LoginFragment"
+        android:name="com.example.nickelffoxassignments_sheenu.Auth.LoginFragment"
         android:label="Login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -40,25 +39,23 @@
         android:name="com.example.nickelffoxassignments_sheenu.MainFragment"
         android:label="Home"
         tools:layout="@layout/fragment_main" >
-        <action
-            android:id="@+id/action_mainFragment_to_loginFragment2"
-            app:destination="@id/loginFragment2" />
+
         <action
             android:id="@+id/action_mainFragment_to_calculatorFragment"
             app:destination="@id/calculatorFragment"
-            app:popUpTo="@id/loginFragment2" />
+            app:popUpTo="@id/mainFragment" />
         <action
             android:id="@+id/action_mainFragment_to_stopWatchFragment"
             app:destination="@id/stopWatchFragment"
-            app:popUpTo="@id/loginFragment2" />
+            app:popUpTo="@id/mainFragment" />
         <action
             android:id="@+id/action_mainFragment_to_newsFragment"
             app:destination="@id/newsFragment"
-            app:popUpTo="@id/loginFragment2" />
+            app:popUpTo="@id/mainFragment" />
         <action
             android:id="@+id/action_mainFragment_to_musicPlayerFragment"
             app:destination="@id/musicPlayerFragment"
-            app:popUpTo="@id/loginFragment2" />
+            app:popUpTo="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/stopWatchFragment"
