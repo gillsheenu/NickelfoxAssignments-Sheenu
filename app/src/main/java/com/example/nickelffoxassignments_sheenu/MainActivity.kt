@@ -110,6 +110,9 @@ class MainActivity : AppCompatActivity() {
                     setColorEnabled = true
                     setAppBarColor(R.color.musicPlayer_color)
                     supportActionBar?.setDisplayHomeAsUpEnabled(false)
+                }else if(destination.id==R.id.historyFragment){
+                    supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
                 } else {
                     setColorEnabled = false
                     setAppBarColor(R.color.colorPrimary)

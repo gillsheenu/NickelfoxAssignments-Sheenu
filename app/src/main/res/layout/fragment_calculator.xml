@@ -57,6 +57,7 @@
         app:layout_constraintBottom_toTopOf="@id/rlcalculation" />
 
     <ImageView
+        android:id="@+id/IVHistory"
         android:layout_width="27dp"
         android:layout_height="27dp"
         android:src="@drawable/ic_baseline_history_24"

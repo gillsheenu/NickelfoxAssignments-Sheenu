@@ -1,12 +1,17 @@
 package com.example.nickelffoxassignments_sheenu.calculator
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.nickelffoxassignments_sheenu.R
 
 class CalculatorFragment : Fragment() {
@@ -33,331 +38,131 @@ class CalculatorFragment : Fragment() {
     lateinit var tvInput: TextView
     lateinit var tvOutput: TextView
     lateinit var tvEquals: TextView
-    lateinit var expression :String
-    var isPressed=false
-    var isNumber=false
-    var inputValue1=""
-    var input=0.0
-    var result=0.0
-    var operands=ArrayList<Double>()
-    var operators=ArrayList<String>()
+    lateinit var history: ImageView
 
+
+    lateinit var calculatorViewModel:CalculatorViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-//        requireActivity().window.statusBarColor=ContextCompat.getColor(requireContext(),R.color.calculator_color)
-//        baseActivity?.supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#D79A9A")))
-
         var mview=inflater.inflate(R.layout.fragment_calculator, container, false)
 
+        calculatorViewModel= ViewModelProvider(this@CalculatorFragment,CalculatorViewModelFactory(
+            requireActivity().application)).get(CalculatorViewModel::class.java)
+
+//
+//        CoroutineScope(Dispatchers.IO).launch {
+//            cDatabase.getCalulatorDAO().insertExpression(Calculations(0,"12+3",15.0))
+//        }
+
+
         initialization(mview)
+
         setListeners()
         return mview
     }
 
-    private fun setListeners() {
-        tvOne.setOnClickListener {
-            isNumber=true
-            setInput("1")
-        }
-        tvTwo.setOnClickListener {
-            isNumber=true
-            setInput("2")
-        }
-        tvThree.setOnClickListener {
-            isNumber=true
-            setInput("3")
-        }
-        tvFour.setOnClickListener {
-            isNumber=true
-            setInput("4")
-        }
-        tvFive.setOnClickListener {
-            isNumber=true
-            setInput("5")
-        }
-        tvSix.setOnClickListener {
-            isNumber=true
-            setInput("6")
-        }
-        tvSeven.setOnClickListener {
-            isNumber=true
-            setInput("7")
-        }
-        tvEight.setOnClickListener {
-            isNumber=true
-            setInput("8")
-        }
-        tvNine.setOnClickListener {
-            isNumber=true
-            setInput("9")
-        }
-        tvZero.setOnClickListener {
-            isNumber=true
-            setInput("0")
-        }
-        tvDoubleZero.setOnClickListener {
-            isNumber=true
-            setInput("00")
-        }
-        tvClear.setOnClickListener {
-
-//            if(isNumber==true){
-//                inputValue1.subSequence(0,inputValue1.length-1)
-//            }else{
-//                operators.removeAt(tvInput.length()-1)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        calculatorViewModel.inputValueLiveData.observe(viewLifecycleOwner, Observer {
+            tvInput.text=it
+        })
+        calculatorViewModel.outputValueLiveData.observe(viewLifecycleOwner, Observer {
+            tvOutput.text=it
+//            if(it!=""){
+//                CoroutineScope(Dispatchers.IO).launch {
+//                    cDatabase.getCalulatorDAO().insertExpression(Calculations(0,tvInput.text.toString(),it))
+//                }
 //            }
-            if(tvInput.length()>0){
-                tvInput.text=tvInput.text.subSequence(0,tvInput.length()-1)
-            }
+
+        })
+
+    }
+
+    private fun setListeners() {
+        history.setOnClickListener {
+            findNavController().navigate(R.id.action_calculatorFragment_to_historyFragment)
         }
+        tvOne.setOnClickListener {
+            calculatorViewModel.setInputValues("1",true)
+        }
+
+        tvTwo.setOnClickListener {
+            calculatorViewModel.setInputValues("2",true)
+        }
+
+        tvThree.setOnClickListener {
+            calculatorViewModel.setInputValues("3",true)
+        }
+
+        tvFour.setOnClickListener {
+            calculatorViewModel.setInputValues("4",true)
+        }
+
+        tvFive.setOnClickListener {
+            calculatorViewModel.setInputValues("5",true)
+        }
+
+        tvSix.setOnClickListener {
+            calculatorViewModel.setInputValues("6",true)
+        }
+
+        tvSeven.setOnClickListener {
+            calculatorViewModel.setInputValues("7",true)
+        }
+
+        tvEight.setOnClickListener {
+            calculatorViewModel.setInputValues("8",true)
+        }
+
+        tvNine.setOnClickListener {
+            calculatorViewModel.setInputValues("9",true)
+        }
+
+        tvZero.setOnClickListener {
+            calculatorViewModel.setInputValues("0",true)
+        }
+
+        tvDoubleZero.setOnClickListener {
+            calculatorViewModel.setInputValues("00",true)
+
+        }
+
+        tvClear.setOnClickListener {
+            calculatorViewModel.clearValue(tvInput.length())
+        }
+
         tvDecimal.setOnClickListener {
-            isNumber=true
-            setInput(".")
+            calculatorViewModel.setInputValues(".",true)
         }
+
         tvAllClear.setOnClickListener {
-            isPressed=false
-            tvInput.text=""
-            tvOutput.text=""
-            inputValue1=""
-            input=0.0
-            operands.clear()
-            operators.clear()
+            calculatorViewModel.allClearValues()
         }
+
         tvAddition.setOnClickListener {
-            isNumber=false
-            setInput("+")
+            calculatorViewModel.setInputValues("+",false)
         }
+
         tvSubtraction.setOnClickListener {
-            isNumber=false
-            setInput("-")
+            calculatorViewModel.setInputValues("-",false)
         }
+
         tvMultiplication.setOnClickListener {
-            isNumber=false
-            setInput("*")
+            calculatorViewModel.setInputValues("*",false)
         }
+
         tvDivision.setOnClickListener {
-            isNumber=false
-            setInput("/")
+            calculatorViewModel.setInputValues("/",false)
         }
+
         tvEquals.setOnClickListener {
-            if(isPressed==true){
-                isNumber = false
-                tvInput.text=""
-                tvOutput.text=""
-                tvInput.text=input.toString()
-                inputValue1=input.toString()
-                input=0.0
-                isPressed=false
-            }else{
-                if(inputValue1!=""){
-                    operands.add(inputValue1.toDouble())
-                    inputValue1 = ""
-                    input= performCalculation(expression)
-                    tvOutput.text=input.toString()
-                    operands.clear()
-                    operators.clear()
-                    isPressed=true
-                }else{
-                    Toast.makeText(context,"Add value",Toast.LENGTH_SHORT).show()
-                }
-
-            }
-
+            calculatorViewModel.equals()
         }
+
         tvPercentage.setOnClickListener {
-            inputValue1=inputValue1.toDouble().div(100).toString()
-            tvInput.text=tvInput.text.toString()+"%"
-
+            calculatorViewModel.setInputValues("%",false)
         }
     }
-
-    private fun performCalculation(expression: String):Double{
-        while(operators.contains("*")||operators.contains("/")){
-            var j=0
-            while(j<operators.size){
-                if(operators[j]=="*"||operators[j]=="/"){
-                    solve(operators[j],j)
-                }
-                j++
-            }
-        }
-
-        while(operators.contains("+")||operators.contains("-")){
-            var j=0
-            while(j<operators.size){
-                if(operators[j]=="+"||operators[j]=="-"){
-                    solve(operators[j],j)
-                }
-                j++
-            }
-        }
-        return operands[0]
-
-    }
-
-
-    private fun solve(s: String, i: Int) {
-        when (s) {
-            "*" -> {
-                if (operands.last() == operands[i + 1]) {
-                    // TODO : check later
-                    var result = operands[i + 1].times(operands[i])
-                    operands[i] = result
-                    operands.removeAt(i + 1)
-                    operators.removeAt(i)
-                } else if (operands.last() == operands[i]) {
-                    var result = operands[i].times(i - 1)
-                    operands[i - 1] = result
-                    operands.removeAt(i)
-                    operators.removeAt(i)
-                } else if (operands.first() == operands[i]) {
-                    var result = operands[i + 1].times(operands[i])
-                    operands[i] = result
-                    operands.removeAt(i + 1)
-                    operators.removeAt(i)
-                } else {
-                    var result = operands[i + 1].times(operands[i])
-                    operands[i] = result
-                    operands.removeAt(i + 1)
-                    operators.removeAt(i)
-                }
-
-
-            }
-
-            "/" -> {
-                if (operands.last() == operands[i + 1]) {
-                    result = (operands[i]).div(operands[i + 1])
-                    operands[i] = result
-                    operands.removeAt(i + 1)
-                    operators.removeAt(i)
-
-                } else if (operands.last() == operands[i]) {
-
-                    result = operands[i - 1].div(operands[i])
-                    operands[i - 1] = result
-                    operands.removeAt(i)
-                    operators.removeAt(i)
-
-                } else if (operands.first() == operands[i]) {
-
-                    result = operands[i].div(operands[i + 1])
-                    operands[i] = result
-                    operands.removeAt(i + 1)
-                    operators.removeAt(i)
-
-                } else {
-
-                    result = operands[i].div(operands[i + 1])
-                    operands[i] = result
-                    operands.removeAt(i + 1)
-                    operators.removeAt(i)
-
-                }
-
-            }
-            "+"->{
-                if (operands.last() == operands[i + 1]) {
-                    var result = operands[i].plus(operands[i+1])
-                    operands[i] = result
-                    operands.removeAt(i + 1)
-                    operators.removeAt(i)
-                } else if (operands.last() == operands[i]) {
-                    var result = operands[i-1].plus(operands[i])
-                    operands[i - 1] = result
-                    operands.removeAt(i)
-                    operators.removeAt(i)
-                } else if (operands.first() == operands[i]) {
-                    var result = operands[i].plus(operands[i+1])
-                    operands[i] = result
-                    operands.removeAt(i + 1)
-                    operators.removeAt(i)
-                } else {
-                    var result = operands[i].plus(operands[i+1])
-                    operands[i] = result
-                    operands.removeAt(i + 1)
-                    operators.removeAt(i)
-                }
-            }
-            "-"->{
-                if (operands.last() == operands[i + 1]) {
-                    var result = operands[i].minus(operands[i+1])
-                    operands[i] = result
-                    operands.removeAt(i + 1)
-                    operators.removeAt(i)
-                } else if (operands.last() == operands[i]) {
-                    var result = operands[i-1].minus(operands[i])
-                    operands[i - 1] = result
-                    operands.removeAt(i)
-                    operators.removeAt(i)
-                } else if (operands.first() == operands[i]) {
-                    var result = operands[i].minus(operands[i+1])
-
-                    operands[i] = result
-                    operands.removeAt(i + 1)
-                    operators.removeAt(i)
-                } else {
-                    var result = operands[i].minus(operands[i+1])
-                    operands[i] = result
-                    operands.removeAt(i + 1)
-                    operators.removeAt(i)
-                }
-            }
-        }
-
-    }
-
-
-
-
-    private fun setInput(pos: String) {
-
-        if(isPressed==true){
-            if(isNumber==false){
-                expression = tvInput.text.toString()
-                expression = expression + pos
-                tvInput.text = expression
-                operands.add(input)
-                if (pos == "+" || pos == "*" || pos == "-" || pos == "/") {
-                    operators.add(pos)
-                    isPressed=false
-
-                }
-
-            }else{
-                Toast.makeText(context,"Add operator",Toast.LENGTH_SHORT).show()
-            }
-
-        }else{
-
-            if (isNumber==true) {
-                expression = tvInput.text.toString()
-                expression = expression + pos
-                tvInput.text = expression
-                inputValue1 = inputValue1 + pos
-            } else {
-                if(inputValue1!=""){
-                    expression = tvInput.text.toString()
-                    expression = expression + pos
-                    tvInput.text = expression
-                    operands.add(inputValue1.toDouble())
-                    inputValue1 = ""
-                    if (pos == "+" || pos == "*" || pos == "-" || pos == "/") {
-                        operators.add(pos)
-
-                    }
-                }else{
-                    Toast.makeText(context,"Add values",Toast.LENGTH_SHORT).show()
-                }
-
-            }
-        }
-
-    }
-
-
-
 
     private fun initialization(view: View) {
         tvOne = view.findViewById(R.id.tvOne)
@@ -382,14 +187,12 @@ class CalculatorFragment : Fragment() {
         tvInput = view.findViewById(R.id.tvScreenCalculation)
         tvOutput = view.findViewById(R.id.tvScreenResult)
         tvClear = view.findViewById(R.id.tvClear)
+        history=view.findViewById(R.id.IVHistory)
 
     }
 
 
 
-//    override fun hidetoolbar(): Boolean
-//        return false
-//    }
-
-
 }
+
+

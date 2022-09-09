@@ -66,7 +66,12 @@
         android:id="@+id/calculatorFragment"
         android:name="com.example.nickelffoxassignments_sheenu.calculator.CalculatorFragment"
         android:label="Calculator"
-        tools:layout="@layout/fragment_calculator" />
+        tools:layout="@layout/fragment_calculator" >
+        <action
+            android:id="@+id/action_calculatorFragment_to_historyFragment"
+            app:destination="@id/historyFragment"
+            app:popUpTo="@id/calculatorFragment" />
+    </fragment>
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.example.nickelffoxassignments_sheenu.NewsFragment"
@@ -77,4 +82,9 @@
         android:name="com.example.nickelffoxassignments_sheenu.MusicPlayerFragment"
         android:label="MusicPlayerr"
         tools:layout="@layout/fragment_music_player" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.nickelffoxassignments_sheenu.calculator.HistoryFragment"
+        android:label="CalculationHistory "
+        tools:layout="@layout/fragment_history" />
 </navigation>
