@@ -1,8 +1,6 @@
-package com.example.nickelffoxassignments_sheenu.Auth
+package com.example.nickelffoxassignments_sheenu.auth
 
 import android.app.Activity
-import android.app.appsearch.AppSearchResult
-import android.app.appsearch.AppSearchResult.RESULT_OK
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -13,7 +11,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.nickelffoxassignments_sheenu.R
@@ -24,24 +21,24 @@ import kotlinx.coroutines.*
 
 class LoginFragment : Fragment() {
 
-    lateinit var emailAddress: EditText
-    lateinit var mPassword: EditText
-    lateinit var logInBtn: Button
-    lateinit var signUpLink: TextView
-    lateinit var optionsLink:TextView
-    lateinit var authViewModel: AuthViewModel
+    private lateinit var emailAddress: EditText
+    private lateinit var mPassword: EditText
+    private lateinit var logInBtn: Button
+    private lateinit var signUpLink: TextView
+    private lateinit var optionsLink:TextView
+    private lateinit var authViewModel: AuthViewModel
 
-    var providers= arrayListOf<AuthUI.IdpConfig>(
+    private var providers= arrayListOf(
         AuthUI.IdpConfig.EmailBuilder().build(),
         AuthUI.IdpConfig.GoogleBuilder().build(),
     )
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        var view=inflater.inflate(R.layout.fragment_login, container, false)
-        authViewModel=ViewModelProvider(this@LoginFragment, AuthViewModelFactory(requireActivity().application)).get(AuthViewModel::class.java)
+        val view=inflater.inflate(R.layout.fragment_login, container, false)
+        authViewModel= ViewModelProvider(this@LoginFragment, AuthViewModelFactory(requireActivity().application))[AuthViewModel::class.java]
 
-        initalizeUI(view)
+        initializeUI(view)
         signUpLink.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment2_to_registrationFragment)
         }
@@ -52,8 +49,9 @@ class LoginFragment : Fragment() {
 
         }
         optionsLink.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch(){
-                OptionsSignUp()
+            CoroutineScope(Dispatchers.IO).launch {
+
+                optionsSignUp()
             }
 
         }
@@ -64,19 +62,19 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        authViewModel.userMutableLiveData.observe(viewLifecycleOwner, Observer {
-            if(it !=null){
+        authViewModel.userMutableLiveData.observe(viewLifecycleOwner) {
+            if (it != null) {
                 findNavController().navigate(R.id.action_loginFragment2_to_mainFragment)
-            }else{
-                Toast.makeText(activity,"user is logout",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(activity, "user is logout", Toast.LENGTH_SHORT).show()
             }
-        })
+        }
     }
 
 
-    suspend  private fun signInUser() {
-        var email=emailAddress.text.toString()
-        var password=mPassword.text.toString()
+    private fun signInUser() {
+        val email=emailAddress.text.toString()
+        val password=mPassword.text.toString()
         if(TextUtils.isEmpty(email)|| TextUtils.isEmpty(password)){
             Toast.makeText(context,"Field can't be empty", Toast.LENGTH_SHORT).show()
         }
@@ -84,8 +82,8 @@ class LoginFragment : Fragment() {
 
     }
 
-       fun OptionsSignUp() {
-        var signUpIntent= AuthUI.getInstance()
+       private fun optionsSignUp() {
+        val signUpIntent= AuthUI.getInstance()
             .createSignInIntentBuilder()
             .setAvailableProviders(providers)
             .build()
@@ -93,10 +91,10 @@ class LoginFragment : Fragment() {
 
 
     }
-    var signUpLauncher=registerForActivityResult(FirebaseAuthUIActivityResultContract()){
+    private var signUpLauncher=registerForActivityResult(FirebaseAuthUIActivityResultContract()){
         this.onSignUpResult(it)
     }
-    fun onSignUpResult(result: FirebaseAuthUIAuthenticationResult) {
+    private fun onSignUpResult(result: FirebaseAuthUIAuthenticationResult) {
         if(result.resultCode== Activity.RESULT_OK){
             authViewModel.addCurrentUser()
 
@@ -109,7 +107,7 @@ class LoginFragment : Fragment() {
 
 
 
-    private fun initalizeUI(view: View) {
+    private fun initializeUI(view: View) {
         signUpLink= view.findViewById(R.id.tvSignUpLink)
         emailAddress=view.findViewById(R.id.etLoginEmail)
         mPassword=view.findViewById(R.id.etLoginPassword)

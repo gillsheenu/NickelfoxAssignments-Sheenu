@@ -5,5 +5,5 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [Calculations::class], version = 1)
 abstract class CalculationDatabase:RoomDatabase() {
-    abstract fun getCalulatorDAO():CalculatorDAO
+    abstract fun getCalculatorDAO():CalculatorDAO
 }

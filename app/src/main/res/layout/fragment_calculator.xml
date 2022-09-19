@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:id="@+id/rlcalculation"
+        android:id="@+id/rlCalculation"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         app:layout_constraintStart_toStartOf="@id/calculator"
@@ -23,7 +23,7 @@
             android:layout_width="165dp"
             android:layout_height="70dp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:fontFamily="@font/poppins_bold"
             android:gravity="end|center_vertical"
             android:textColor="#00688B"
@@ -34,13 +34,14 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:fontFamily="@font/poppins_bold"
             android:gravity="center"
-            android:paddingRight="10dp"
-            android:text="="
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:text="@string/equals_sign"
             android:textColor="#00688B"
-            android:textSize="26dp" />
+            android:textSize="26sp" />
 
     </RelativeLayout>
     <TextView
@@ -53,8 +54,8 @@
         android:gravity="center_vertical|end"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
-        app:layout_constraintEnd_toEndOf="@id/rlcalculation"
-        app:layout_constraintBottom_toTopOf="@id/rlcalculation" />
+        app:layout_constraintEnd_toEndOf="@id/rlCalculation"
+        app:layout_constraintBottom_toTopOf="@id/rlCalculation" />
 
     <ImageView
         android:id="@+id/IVHistory"
@@ -64,8 +65,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="18dp"
-        android:layout_marginRight="40dp"
-        />
+        android:layout_marginEnd="40dp"
+        android:contentDescription="@string/history" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -91,14 +92,14 @@
             android:layout_width="62dp"
             android:layout_height="5dp"
             android:background="#373737"
-            android:layout_marginLeft="140dp"
+            android:layout_marginStart="140dp"
             android:layout_marginTop="33dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true" />
         <View
             android:layout_width="130dp"
             android:layout_height="5dp"
-            android:layout_marginLeft="124dp"
+            android:layout_marginStart="124dp"
             android:layout_marginBottom="20dp"
             android:background="#116F99"
             android:layout_alignParentStart="true"
@@ -109,9 +110,9 @@
             android:id="@+id/subRelative"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:gravity="center">
 
@@ -119,33 +120,27 @@
                 android:id="@+id/viewAddition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:background="@drawable/layout_background"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvAllclear"
-                    style="@style/calculator_textviews"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:text="AC" />
+                    android:id="@+id/tvAllClear"
+                    style="@style/calculator_textview"
+                    android:text="@string/ac" />
 
                 <TextView
                     android:id="@+id/tvClear"
-                    style="@style/calculator_textviews"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="23dp"
-                    android:layout_toRightOf="@id/tvAllclear"
-                    android:text="C" />
+                    style="@style/calculator_textview"
+                    android:layout_marginStart="23dp"
+                    android:text="@string/c" />
 
                 <TextView
                     android:id="@+id/tvPercentage"
-                    style="@style/calculator_textviews"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="23dp"
-                    android:layout_toRightOf="@id/tvClear"
-                    android:text="%" />
+                    style="@style/calculator_textview"
+                    android:layout_marginStart="23dp"
+                    android:text="@string/Percentage" />
 
             </LinearLayout>
 
@@ -154,172 +149,163 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="23dp"
-                android:layout_toRightOf="@id/viewAddition"
+                android:layout_marginStart="23dp"
+                android:layout_toEndOf="@id/viewAddition"
                 android:background="@drawable/layout_background"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tvDivision"
-                    style="@style/calculator_textviews"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
-                    android:text="/" />
+                    style="@style/calculator_textview"
+                    android:text="@string/Division" />
 
                 <TextView
                     android:id="@+id/tvMultiplication"
-                    style="@style/calculator_textviews"
-                    android:layout_below="@id/tvDivision"
-                    android:layout_alignParentRight="true"
+                    style="@style/calculator_textview"
                     android:layout_marginTop="18dp"
-                    android:text="*" />
+                    android:text="@string/multiplication" />
 
                 <TextView
                     android:id="@+id/tvSubtraction"
-                    style="@style/calculator_textviews"
-                    android:layout_below="@id/tvMultiplication"
-                    android:layout_alignParentRight="true"
+                    style="@style/calculator_textview"
                     android:layout_marginTop="18dp"
-                    android:text="-" />
+                    android:text="@string/subtraction" />
 
                 <TextView
                     android:id="@+id/tvAddition"
-                    style="@style/calculator_textviews"
-                    android:layout_below="@id/tvSubtraction"
-                    android:layout_alignParentRight="true"
+                    style="@style/calculator_textview"
                     android:layout_marginTop="18dp"
-                    android:text="+" />
+                    android:text="@string/addition" />
 
                 <TextView
                     android:id="@+id/tvEquals"
-                    style="@style/calculator_textviews"
-                    android:layout_below="@id/tvAddition"
-                    android:layout_alignParentRight="true"
+                    style="@style/calculator_textview"
                     android:layout_marginTop="18dp"
                     android:background="@drawable/circular_textview"
-                    android:text="=" />
+                    android:text="@string/Equals" />
 
             </LinearLayout>
 
 
             <TextView
                 android:id="@+id/tvOne"
-                style="@style/calculator_textviews"
+                style="@style/calculator_textview"
                 android:layout_below="@id/viewAddition"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_marginTop="18dp"
                 android:background="@drawable/circular_textview"
-                android:text="1" />
+                android:text="@string/_1" />
 
             <TextView
                 android:id="@+id/tvFour"
-                style="@style/calculator_textviews"
+                style="@style/calculator_textview"
                 android:layout_below="@id/tvOne"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_marginTop="18dp"
                 android:background="@drawable/circular_textview"
-                android:text="4" />
+                android:text="@string/_4" />
 
             <TextView
                 android:id="@+id/tvSeven"
-                style="@style/calculator_textviews"
+                style="@style/calculator_textview"
                 android:layout_below="@id/tvFour"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_marginTop="18dp"
                 android:background="@drawable/circular_textview"
-                android:text="7" />
+                android:text="@string/_7" />
 
             <TextView
                 android:id="@+id/tvDecimal"
-                style="@style/calculator_textviews"
+                style="@style/calculator_textview"
                 android:layout_below="@id/tvSeven"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_marginTop="18dp"
                 android:background="@drawable/circular_textview"
                 android:fontFamily="@font/poppins_bold"
-                android:text="." />
+                android:text="@string/decimal"
+                android:textColor="#0097A7" />
 
             <TextView
                 android:id="@+id/tvTwo"
-                style="@style/calculator_textviews"
+                style="@style/calculator_textview"
                 android:layout_below="@id/viewAddition"
-                android:layout_marginLeft="23dp"
+                android:layout_marginStart="23dp"
                 android:layout_marginTop="18dp"
-                android:layout_toRightOf="@id/tvOne"
+                android:layout_toEndOf="@id/tvOne"
                 android:background="@drawable/circular_textview"
-                android:text="2"
+                android:text="@string/_2"
                 android:textColor="#00688B"
                 android:textSize="26sp" />
 
             <TextView
                 android:id="@+id/tvFive"
-                style="@style/calculator_textviews"
+                style="@style/calculator_textview"
                 android:layout_below="@id/tvTwo"
-                android:layout_marginLeft="23dp"
+                android:layout_marginStart="23dp"
                 android:layout_marginTop="18dp"
-                android:layout_toRightOf="@id/tvFour"
+                android:layout_toEndOf="@id/tvFour"
                 android:background="@drawable/circular_textview"
-                android:text="5" />
+                android:text="@string/_5" />
 
             <TextView
                 android:id="@+id/tvEight"
-                style="@style/calculator_textviews"
+                style="@style/calculator_textview"
                 android:layout_below="@id/tvFive"
-                android:layout_marginLeft="23dp"
+                android:layout_marginStart="23dp"
                 android:layout_marginTop="18dp"
-                android:layout_toRightOf="@id/tvSeven"
+                android:layout_toEndOf="@id/tvSeven"
                 android:background="@drawable/circular_textview"
-                android:text="8" />
+                android:text="@string/_8" />
 
             <TextView
                 android:id="@+id/tvZero"
-                style="@style/calculator_textviews"
+                style="@style/calculator_textview"
                 android:layout_below="@id/tvEight"
-                android:layout_marginLeft="23dp"
+                android:layout_marginStart="23dp"
                 android:layout_marginTop="18dp"
-                android:layout_toRightOf="@id/tvDecimal"
+                android:layout_toEndOf="@id/tvDecimal"
                 android:background="@drawable/circular_textview"
-                android:text="0" />
+                android:text="@string/_0" />
 
             <TextView
                 android:id="@+id/tvThree"
-                style="@style/calculator_textviews"
+                style="@style/calculator_textview"
                 android:layout_below="@id/viewAddition"
-                android:layout_marginLeft="23dp"
+                android:layout_marginStart="23dp"
                 android:layout_marginTop="18dp"
-                android:layout_toRightOf="@id/tvTwo"
+                android:layout_toEndOf="@id/tvTwo"
                 android:background="@drawable/circular_textview"
-                android:text="3" />
+                android:text="@string/_3" />
 
             <TextView
                 android:id="@+id/tvSix"
-                style="@style/calculator_textviews"
+                style="@style/calculator_textview"
                 android:layout_below="@id/tvThree"
-                android:layout_marginLeft="23dp"
+                android:layout_marginStart="23dp"
                 android:layout_marginTop="18dp"
-                android:layout_toRightOf="@id/tvFive"
+                android:layout_toEndOf="@id/tvFive"
                 android:background="@drawable/circular_textview"
-                android:text="6" />
+                android:text="@string/_6" />
 
             <TextView
                 android:id="@+id/tvNine"
-                style="@style/calculator_textviews"
+                style="@style/calculator_textview"
                 android:layout_below="@id/tvSix"
-                android:layout_marginLeft="23dp"
+                android:layout_marginStart="23dp"
                 android:layout_marginTop="18dp"
-                android:layout_toRightOf="@id/tvEight"
+                android:layout_toEndOf="@id/tvEight"
                 android:background="@drawable/circular_textview"
-                android:text="9" />
+                android:text="@string/_9" />
 
             <TextView
                 android:id="@+id/tvDoubleZero"
-                style="@style/calculator_textviews"
+                style="@style/calculator_textview"
                 android:layout_below="@id/tvNine"
-                android:layout_marginLeft="23dp"
+                android:layout_marginStart="23dp"
                 android:layout_marginTop="18dp"
-                android:layout_toRightOf="@id/tvZero"
+                android:layout_toEndOf="@id/tvZero"
                 android:background="@drawable/circular_textview"
-                android:text="00" />
+                android:text="@string/_00" />
 
 
         </RelativeLayout>

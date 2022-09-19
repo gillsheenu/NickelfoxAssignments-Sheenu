@@ -1,80 +1,77 @@
 package com.example.nickelffoxassignments_sheenu.calculator
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.nickelffoxassignments_sheenu.R
 
 class CalculatorFragment : Fragment() {
 
-    lateinit var tvOne: TextView
-    lateinit var tvTwo: TextView
-    lateinit var tvThree: TextView
-    lateinit var tvFour: TextView
-    lateinit var tvFive: TextView
-    lateinit var tvSix: TextView
-    lateinit var tvSeven: TextView
-    lateinit var tvEight: TextView
-    lateinit var tvNine: TextView
-    lateinit var tvZero: TextView
-    lateinit var tvDoubleZero: TextView
-    lateinit var tvDecimal: TextView
-    lateinit var tvAddition: TextView
-    lateinit var tvMultiplication: TextView
-    lateinit var tvDivision: TextView
-    lateinit var tvSubtraction: TextView
-    lateinit var tvPercentage: TextView
-    lateinit var tvAllClear: TextView
-    lateinit var tvClear: TextView
-    lateinit var tvInput: TextView
-    lateinit var tvOutput: TextView
-    lateinit var tvEquals: TextView
-    lateinit var history: ImageView
+    private lateinit var tvOne: TextView
+    private lateinit var tvTwo: TextView
+    private lateinit var tvThree: TextView
+    private lateinit var tvFour: TextView
+    private lateinit var tvFive: TextView
+    private lateinit var tvSix: TextView
+    private lateinit var tvSeven: TextView
+    private lateinit var tvEight: TextView
+    private lateinit var tvNine: TextView
+    private lateinit var tvZero: TextView
+    private lateinit var tvDoubleZero: TextView
+    private lateinit var tvDecimal: TextView
+    private lateinit var tvAddition: TextView
+    private lateinit var tvMultiplication: TextView
+    private lateinit var tvDivision: TextView
+    private lateinit var tvSubtraction: TextView
+    private lateinit var tvPercentage: TextView
+    private lateinit var tvAllClear: TextView
+    private lateinit var tvClear: TextView
+    private lateinit var tvInput: TextView
+    private lateinit var tvOutput: TextView
+    private lateinit var tvEquals: TextView
+    private lateinit var history: ImageView
 
 
-    lateinit var calculatorViewModel:CalculatorViewModel
+    private lateinit var calculatorViewModel:CalculatorViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var mview=inflater.inflate(R.layout.fragment_calculator, container, false)
+        val mView=inflater.inflate(R.layout.fragment_calculator, container, false)
 
         calculatorViewModel= ViewModelProvider(this@CalculatorFragment,CalculatorViewModelFactory(
-            requireActivity().application)).get(CalculatorViewModel::class.java)
+            requireActivity().application))[CalculatorViewModel::class.java]
 
 //
 //        CoroutineScope(Dispatchers.IO).launch {
-//            cDatabase.getCalulatorDAO().insertExpression(Calculations(0,"12+3",15.0))
+//            cDatabase.getCalculatorDAO().insertExpression(Calculations(0,"12+3",15.0))
 //        }
 
 
-        initialization(mview)
+        initialization(mView)
 
         setListeners()
-        return mview
+        return mView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        calculatorViewModel.inputValueLiveData.observe(viewLifecycleOwner, Observer {
-            tvInput.text=it
-        })
-        calculatorViewModel.outputValueLiveData.observe(viewLifecycleOwner, Observer {
-            tvOutput.text=it
+        calculatorViewModel.inputValueLiveData.observe(viewLifecycleOwner) {
+            tvInput.text = it
+        }
+        calculatorViewModel.outputValueLiveData.observe(viewLifecycleOwner) {
+            tvOutput.text = it
 //            if(it!=""){
 //                CoroutineScope(Dispatchers.IO).launch {
-//                    cDatabase.getCalulatorDAO().insertExpression(Calculations(0,tvInput.text.toString(),it))
+//                    cDatabase.getCalculatorDAO().insertExpression(Calculations(0,tvInput.text.toString(),it))
 //                }
 //            }
 
-        })
+        }
 
     }
 
@@ -183,7 +180,7 @@ class CalculatorFragment : Fragment() {
         tvAddition = view.findViewById(R.id.tvAddition)
         tvSubtraction = view.findViewById(R.id.tvSubtraction)
         tvEquals = view.findViewById(R.id.tvEquals)
-        tvAllClear = view.findViewById(R.id.tvAllclear)
+        tvAllClear = view.findViewById(R.id.tvAllClear)
         tvInput = view.findViewById(R.id.tvScreenCalculation)
         tvOutput = view.findViewById(R.id.tvScreenResult)
         tvClear = view.findViewById(R.id.tvClear)

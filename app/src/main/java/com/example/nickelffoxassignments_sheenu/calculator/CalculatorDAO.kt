@@ -12,8 +12,8 @@ interface CalculatorDAO {
     @Update
     suspend fun updateExpression(calculation: Calculations)
 
-    @Delete
-    suspend fun DeleteExpression(calculation: Calculations)
+//    @Delete
+//    suspend fun deleteExpression(calculation: Calculations)
 
 
     @Query("SELECT * FROM calculation")

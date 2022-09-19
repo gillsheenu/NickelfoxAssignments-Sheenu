@@ -3,7 +3,6 @@ package com.example.nickelffoxassignments_sheenu.kotlin.extension
 import android.os.Build
 import androidx.annotation.RequiresApi
 import java.time.LocalDate
-import com.example.nickelffoxassignments_sheenu.kotlin.extension.nextYearDay
 
 fun String.formattedString():String{
     return "-------------------------\n$this\n------------------------"

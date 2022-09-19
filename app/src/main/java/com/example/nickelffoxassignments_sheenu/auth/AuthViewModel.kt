@@ -1,11 +1,10 @@
-package com.example.nickelffoxassignments_sheenu.Auth
+package com.example.nickelffoxassignments_sheenu.auth
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
-import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 
 class AuthViewModel(val application: Application):ViewModel() {
-    var authRepository=AuthenticationRepository(application)
+    private var authRepository=AuthenticationRepository(application)
 
     var userMutableLiveData = authRepository.firebaseMutableLiveData
     var statusMutableLiveData=authRepository.loggedMutableLiveData

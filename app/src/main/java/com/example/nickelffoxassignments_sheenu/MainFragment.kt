@@ -7,16 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.paging.ExperimentalPagingApi
 import androidx.viewpager2.widget.ViewPager2
-import com.google.firebase.auth.FirebaseAuth
 
-
+@ExperimentalPagingApi
 class MainFragment : Fragment() {
 
-    lateinit var viewPager: ViewPager2
-    lateinit var imagess:ArrayList<Int>
-    var baseActivity: MainActivity? =null
+    private lateinit var viewPager: ViewPager2
+    private lateinit var images:ArrayList<Int>
+    private var baseActivity: MainActivity? =null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -24,12 +23,12 @@ class MainFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var view = inflater.inflate(R.layout.fragment_main, container, false)
-        imagess=ArrayList<Int>()
-        imagess.add(R.drawable.calculator)
-        imagess.add(R.drawable.stopwatch)
-        imagess.add(R.drawable.mnews)
-        imagess.add(R.drawable.music)
+        val view = inflater.inflate(R.layout.fragment_main, container, false)
+        images=ArrayList()
+        images.add(R.drawable.calculator)
+        images.add(R.drawable.stopwatch)
+        images.add(R.drawable.mnews)
+        images.add(R.drawable.music)
 
 //        var btnLogout = view.findViewById<Button>(R.id.btnLogout)
 //        firebaseAuth = FirebaseAuth.getInstance()
@@ -39,7 +38,7 @@ class MainFragment : Fragment() {
 //        }
 
 
-        var adapter = ViewPagerAdapter(imagess)
+        val adapter = ViewPagerAdapter(images)
 
         viewPager = view.findViewById(R.id.viewPager)
         viewPager.adapter = adapter
@@ -54,10 +53,10 @@ class MainFragment : Fragment() {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
             }
 
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-
-            }
+//            override fun onPageSelected(position: Int) {
+//                super.onPageSelected(position)
+//
+//            }
 
             override fun onPageScrollStateChanged(state: Int) {
                 updateBgColor()
@@ -81,9 +80,9 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun setColor(mcolor:Int) {
-        requireActivity().window.statusBarColor=ContextCompat.getColor(requireContext(),mcolor)
-        baseActivity?.supportActionBar?.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(),mcolor))
+    private fun setColor(mColor:Int) {
+        requireActivity().window.statusBarColor=ContextCompat.getColor(requireContext(),mColor)
+        baseActivity?.supportActionBar?.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(),mColor))
 
     }
 
@@ -98,7 +97,7 @@ class MainFragment : Fragment() {
         }
     }
 
-//    override fun hidetoolbar(): Boolean {
+//    override fun hideToolbar(): Boolean {
 //        return true
 //    }
 }

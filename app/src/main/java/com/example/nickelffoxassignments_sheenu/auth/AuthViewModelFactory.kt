@@ -1,4 +1,4 @@
-package com.example.nickelffoxassignments_sheenu.Auth
+package com.example.nickelffoxassignments_sheenu.auth
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

@@ -10,16 +10,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CalculatorRepository(var application: Application) {
-    var exp:String=""
-    var isPressed=false
-    var isNumber=false
-    var inputValue1=""
-    var input=0.0
-    var result=0.0
-    var operands=ArrayList<Double>()
-    var operators=ArrayList<String>()
+    private var exp:String=""
+    private var isPressed=false
+    private var isNumber=false
+    private var inputValue1=""
+    private var input=0.0
+    private var result=0.0
+    private var operands=ArrayList<Double>()
+    private var operators=ArrayList<String>()
     var inputLiveData= MutableLiveData<String>()
-    var ouputLiveData= MutableLiveData<String>()
+    var outputLiveData= MutableLiveData<String>()
 
     var cDatabase:CalculationDatabase= Room.databaseBuilder(application, CalculationDatabase::class.java,"calculatorDB").build()
 
@@ -27,8 +27,8 @@ class CalculatorRepository(var application: Application) {
 
     fun setInput(pos:String,mNumber:Boolean){
         isNumber=mNumber
-        if(isPressed==false) {
-            if (isNumber == true) {
+        if(!isPressed) {
+            if (isNumber) {
                 exp += pos
                 inputLiveData.postValue(exp)
                 inputValue1 += pos
@@ -54,7 +54,7 @@ class CalculatorRepository(var application: Application) {
             }
 
         }else {
-            Toast.makeText(application,"Press eauals Operator", Toast.LENGTH_SHORT).show()
+            Toast.makeText(application,"Press equals Operator", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -89,22 +89,22 @@ class CalculatorRepository(var application: Application) {
             "*" -> {
                 if (operands.last() == operands[i + 1]) {
                     // TODO : check later
-                    var result = operands[i + 1].times(operands[i])
+                    val result = operands[i + 1].times(operands[i])
                     operands[i] = result
                     operands.removeAt(i + 1)
                     operators.removeAt(i)
                 } else if (operands.last() == operands[i]) {
-                    var result = operands[i].times(i - 1)
+                    val result = operands[i].times(i - 1)
                     operands[i - 1] = result
                     operands.removeAt(i)
                     operators.removeAt(i)
                 } else if (operands.first() == operands[i]) {
-                    var result = operands[i + 1].times(operands[i])
+                    val result = operands[i + 1].times(operands[i])
                     operands[i] = result
                     operands.removeAt(i + 1)
                     operators.removeAt(i)
                 } else {
-                    var result = operands[i + 1].times(operands[i])
+                    val result = operands[i + 1].times(operands[i])
                     operands[i] = result
                     operands.removeAt(i + 1)
                     operators.removeAt(i)
@@ -146,22 +146,22 @@ class CalculatorRepository(var application: Application) {
             }
             "+"->{
                 if (operands.last() == operands[i + 1]) {
-                    var result = operands[i].plus(operands[i+1])
+                    val result = operands[i].plus(operands[i+1])
                     operands[i] = result
                     operands.removeAt(i + 1)
                     operators.removeAt(i)
                 } else if (operands.last() == operands[i]) {
-                    var result = operands[i-1].plus(operands[i])
+                    val result = operands[i-1].plus(operands[i])
                     operands[i - 1] = result
                     operands.removeAt(i)
                     operators.removeAt(i)
                 } else if (operands.first() == operands[i]) {
-                    var result = operands[i].plus(operands[i+1])
+                    val result = operands[i].plus(operands[i+1])
                     operands[i] = result
                     operands.removeAt(i + 1)
                     operators.removeAt(i)
                 } else {
-                    var result = operands[i].plus(operands[i+1])
+                    val result = operands[i].plus(operands[i+1])
                     operands[i] = result
                     operands.removeAt(i + 1)
                     operators.removeAt(i)
@@ -169,23 +169,23 @@ class CalculatorRepository(var application: Application) {
             }
             "-"->{
                 if (operands.last() == operands[i + 1]) {
-                    var result = operands[i].minus(operands[i+1])
+                    val result = operands[i].minus(operands[i+1])
                     operands[i] = result
                     operands.removeAt(i + 1)
                     operators.removeAt(i)
                 } else if (operands.last() == operands[i]) {
-                    var result = operands[i-1].minus(operands[i])
+                    val result = operands[i-1].minus(operands[i])
                     operands[i - 1] = result
                     operands.removeAt(i)
                     operators.removeAt(i)
                 } else if (operands.first() == operands[i]) {
-                    var result = operands[i].minus(operands[i+1])
+                    val result = operands[i].minus(operands[i+1])
 
                     operands[i] = result
                     operands.removeAt(i + 1)
                     operators.removeAt(i)
                 } else {
-                    var result = operands[i].minus(operands[i+1])
+                    val result = operands[i].minus(operands[i+1])
                     operands[i] = result
                     operands.removeAt(i + 1)
                     operators.removeAt(i)
@@ -195,16 +195,16 @@ class CalculatorRepository(var application: Application) {
 
     }
 
-    fun Equal(){
+    fun equals(){
 
-        if(isPressed==true) {
+        if(isPressed) {
             exp = ""
             inputLiveData.postValue(exp)
             exp=input.toString()
             inputLiveData.postValue(exp)
             inputValue1 = input.toString()
             input = 0.0
-            ouputLiveData.postValue(input.toString())
+            outputLiveData.postValue(input.toString())
             isPressed=false
 
         }else {
@@ -213,9 +213,9 @@ class CalculatorRepository(var application: Application) {
                 operands.add(inputValue1.toDouble())
                 inputValue1 = ""
                 input = performCalculation(exp)
-                ouputLiveData.postValue(input.toString())
+                outputLiveData.postValue(input.toString())
                 CoroutineScope(Dispatchers.IO).launch {
-                    cDatabase.getCalulatorDAO().insertExpression(Calculations(0,exp,input.toString()))
+                    cDatabase.getCalculatorDAO().insertExpression(Calculations(0,exp,input.toString()))
                 }
                 operands.clear()
                 operators.clear()
@@ -230,15 +230,15 @@ class CalculatorRepository(var application: Application) {
         isPressed=false
         exp=""
         inputLiveData.postValue(exp)
-        ouputLiveData.postValue(exp)
+        outputLiveData.postValue(exp)
         inputValue1=""
         input=0.0
         operands.clear()
         operators.clear()
     }
 
-    fun Clear(Len:Int){
-        if(isNumber==true && inputValue1 !=""){
+    fun clear(Len:Int){
+        if(isNumber && inputValue1 !=""){
             try{
                 inputValue1= inputValue1.subSequence(0,inputValue1.length-1).toString()
 

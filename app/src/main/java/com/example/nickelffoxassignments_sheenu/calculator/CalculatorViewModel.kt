@@ -8,13 +8,13 @@ class CalculatorViewModel(var application: Application): ViewModel() {
     var calculatorRepository=CalculatorRepository(application)
 
     var inputValueLiveData=calculatorRepository.inputLiveData
-    var outputValueLiveData=calculatorRepository.ouputLiveData
+    var outputValueLiveData=calculatorRepository.outputLiveData
 
     fun setInputValues(pos:String,isNumber:Boolean){
         calculatorRepository.setInput(pos,isNumber)
     }
     fun equals(){
-        calculatorRepository.Equal()
+        calculatorRepository.equals()
     }
     //    fun percentage(){
 //        calculatorRepository.percent()
@@ -23,6 +23,6 @@ class CalculatorViewModel(var application: Application): ViewModel() {
         calculatorRepository.allClear()
     }
     fun clearValue(ln:Int){
-        calculatorRepository.Clear(ln)
+        calculatorRepository.clear(ln)
     }
 }

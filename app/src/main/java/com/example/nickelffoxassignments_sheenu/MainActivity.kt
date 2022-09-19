@@ -1,62 +1,52 @@
 package com.example.nickelffoxassignments_sheenu
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import androidx.core.content.ContextCompat
-import com.example.nickelffoxassignments_sheenu.R
 
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
-import android.widget.Toolbar
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.GravityCompat
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.*
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
-import com.example.nickelffoxassignments_sheenu.Auth.AuthViewModel
-import com.example.nickelffoxassignments_sheenu.Auth.AuthViewModelFactory
+import androidx.paging.ExperimentalPagingApi
+import com.example.nickelffoxassignments_sheenu.auth.AuthViewModel
+import com.example.nickelffoxassignments_sheenu.auth.AuthViewModelFactory
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.auth.FirebaseAuth
-import kotlin.properties.Delegates
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
 
+@ExperimentalPagingApi
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    lateinit var navigationView: NavigationView
-    lateinit var navController: NavController
-    lateinit var mWindow: Window
-    lateinit var drawerlayout: DrawerLayout
-    var setItemEnabled: Boolean = true
-    var setColorEnabled: Boolean = false
-    lateinit var authViewModel: AuthViewModel
+    private lateinit var navigationView: NavigationView
+    private lateinit var navController: NavController
+    private lateinit var mWindow: Window
+    private lateinit var drawerLayout: DrawerLayout
+    private var setItemEnabled = true
+    private var setColorEnabled = false
+    private lateinit var authViewModel: AuthViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
+        val splashScreen = installSplashScreen()
         setContentView(R.layout.activity_main)
-        authViewModel=ViewModelProvider(this@MainActivity,AuthViewModelFactory(application)).get(AuthViewModel::class.java)
+        authViewModel= ViewModelProvider(this@MainActivity,AuthViewModelFactory(application))[AuthViewModel::class.java]
         setUpViews()
         setupNavigationDrawer()
-        setUpNavigationview()
+        setUpNavigationView()
         setUpFeatures()
 
-        authViewModel.statusMutableLiveData.observe(this, Observer {
-            if(true){
+        authViewModel.statusMutableLiveData.observe(this) {
 
                 navController.popBackStack()
 
                 navController.navigate(R.id.loginFragment2)
-            }
-        })
+
+        }
 
 //        testCrash=findViewById(R.id.btnTestCrash)
 //        testCrash.setOnClickListener {
@@ -65,70 +55,70 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpFeatures() {
-        navController.addOnDestinationChangedListener(object :
-            NavController.OnDestinationChangedListener {
-            override fun onDestinationChanged(
-                controller: NavController,
-                destination: NavDestination,
-                arguments: Bundle?
-            ) {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.registrationFragment) {
+                //                    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+                navigationView.menu.findItem(R.id.menu_logout).isEnabled = false
+                setItemEnabled = false
+                invalidateOptionsMenu()
+            } else {
+                setItemEnabled = true
+                invalidateOptionsMenu()
+            }
+            if (destination.id == R.id.loginFragment2) {
+                supportActionBar?.setDisplayHomeAsUpEnabled(false)
+                setItemEnabled = false
+                invalidateOptionsMenu()
+            } else {
+                setItemEnabled = true
+                invalidateOptionsMenu()
+            }
 
-                if (destination.id == R.id.registrationFragment) {
-//                    supportActionBar?.setDisplayHomeAsUpEnabled(true)
-                    navigationView.menu.findItem(R.id.menu_logout).setEnabled(false)
-                    setItemEnabled = false
-                    invalidateOptionsMenu()
-                } else {
-                    setItemEnabled = true
-                    invalidateOptionsMenu()
-                }
-                if(destination.id==R.id.loginFragment2){
+            when (destination.id) {
+                R.id.mainFragment -> {
                     supportActionBar?.setDisplayHomeAsUpEnabled(false)
-                    setItemEnabled = false
-                    invalidateOptionsMenu()
-                } else {
-                    setItemEnabled = true
-                    invalidateOptionsMenu()
                 }
-
-                if(destination.id==R.id.mainFragment){
-                    supportActionBar?.setDisplayHomeAsUpEnabled(false)
-                } else if (destination.id == R.id.calculatorFragment) {
+                R.id.calculatorFragment -> {
 
                     setColorEnabled = true
                     setAppBarColor(R.color.calculator_color)
                     supportActionBar?.setDisplayHomeAsUpEnabled(false)
-                } else if (destination.id == R.id.stopWatchFragment) {
+                }
+                R.id.stopWatchFragment -> {
                     setColorEnabled = true
                     setAppBarColor(R.color.stopWatch_color)
                     supportActionBar?.setDisplayHomeAsUpEnabled(false)
-                } else if (destination.id == R.id.newsFragment) {
+                }
+                R.id.newsFragment -> {
                     setColorEnabled = true
                     setAppBarColor(R.color.news_color)
                     supportActionBar?.setDisplayHomeAsUpEnabled(false)
-                } else if (destination.id == R.id.musicPlayerFragment) {
+                }
+                R.id.musicPlayerFragment -> {
                     setColorEnabled = true
                     setAppBarColor(R.color.musicPlayer_color)
                     supportActionBar?.setDisplayHomeAsUpEnabled(false)
-                }else if(destination.id==R.id.historyFragment){
+                }
+                R.id.historyFragment -> {
                     supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
-                } else {
+                }
+                else -> {
                     setColorEnabled = false
                     setAppBarColor(R.color.colorPrimary)
-//                    supportActionBar?.setDisplayHomeAsUpEnabled(false)
+                    //                    supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 }
             }
-        })
+        }
     }
 
     private fun setUpViews() {
-        var navHostFragment =
+        val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navigationView = findViewById(R.id.navigationView)
         navController = navHostFragment.navController
-        drawerlayout = findViewById(R.id.Drawer)
-        mWindow = this@MainActivity.getWindow()
+        drawerLayout = findViewById(R.id.Drawer)
+        mWindow = this@MainActivity.window
 
     }
 
@@ -147,38 +137,30 @@ class MainActivity : AppCompatActivity() {
     private fun setupNavigationDrawer() {
 
         navigationView.setupWithNavController(navController)
-        NavigationUI.setupActionBarWithNavController(this, navController, drawerlayout)
+        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
 //        supportActionBar?.setDisplayHomeAsUpEnabled(false)
 //        supportActionBar?.setDisplayShowHomeEnabled(false)
 
 
     }
 
-    private fun setUpNavigationview() {
-        navigationView.setNavigationItemSelectedListener(object :
-            NavigationView.OnNavigationItemSelectedListener {
-            override fun onNavigationItemSelected(item: MenuItem): Boolean {
-                when (item.itemId) {
-                    R.id.menu_logout -> {
-                        authViewModel.logout()
-                    }
+    private fun setUpNavigationView() {
+        navigationView.setNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.menu_logout -> {
+                    authViewModel.logout()
                 }
-                return true
             }
-
-        })
+            true
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return NavigationUI.navigateUp(navController, drawerlayout)
+        return NavigationUI.navigateUp(navController, drawerLayout)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        if (setItemEnabled) {
-            menu?.findItem(R.id.menu_logout)!!.setEnabled(true)
-        } else {
-            menu?.findItem(R.id.menu_logout)!!.setEnabled(false)
-        }
+        menu?.findItem(R.id.menu_logout)!!.isEnabled = setItemEnabled
         return true
     }
 
@@ -198,8 +180,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 //    override fun onBackPressed() {
-//        if(drawerlayout.isDrawerOpen(GravityCompat.START)){
-//            drawerlayout.closeDrawer(GravityCompat.START)
+//        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+//            drawerLayout.closeDrawer(GravityCompat.START)
 //        }else{
 //            super.onBackPressed()
 //        }

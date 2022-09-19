@@ -1,9 +1,7 @@
-package com.example.nickelffoxassignments_sheenu.Auth
+package com.example.nickelffoxassignments_sheenu.auth
 
 
 import android.app.Activity
-import android.app.appsearch.AppSearchResult
-import android.app.appsearch.AppSearchResult.RESULT_OK
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -15,9 +13,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.nickelffoxassignments_sheenu.R
 import com.firebase.ui.auth.AuthUI
@@ -28,15 +24,15 @@ import kotlinx.coroutines.*
 
 class RegistrationFragment : Fragment() {
 
-   lateinit var signInLink: TextView
-    lateinit var userName: EditText
-    lateinit var emailAddress: EditText
-    lateinit var mPassword: EditText
-    lateinit var signUpBtn: Button
-    lateinit var optionLink: TextView
-    lateinit var authViewModel:AuthViewModel
+   private lateinit var signInLink: TextView
+    private lateinit var userName: EditText
+    private lateinit var emailAddress: EditText
+    private lateinit var mPassword: EditText
+    private lateinit var signUpBtn: Button
+    private lateinit var optionLink: TextView
+    private lateinit var authViewModel:AuthViewModel
 
-    var providers= arrayListOf<AuthUI.IdpConfig>(
+    private var providers= arrayListOf(
         AuthUI.IdpConfig.EmailBuilder().build(),
         AuthUI.IdpConfig.GoogleBuilder().build(),
     )
@@ -49,8 +45,8 @@ class RegistrationFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_registration, container, false)
 
-        authViewModel=ViewModelProvider(this@RegistrationFragment,AuthViewModelFactory(requireActivity().application)).get(AuthViewModel::class.java)
-        initalizeUI(view)
+        authViewModel= ViewModelProvider(this@RegistrationFragment,AuthViewModelFactory(requireActivity().application))[AuthViewModel::class.java]
+        initializeUI(view)
 
         signInLink.setOnClickListener {
             findNavController().navigate(R.id.action_registrationFragment_to_loginFragment2)
@@ -63,7 +59,7 @@ class RegistrationFragment : Fragment() {
 
         optionLink.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                OptionsSignUp()
+                optionsSignUp()
 
             }
         }
@@ -73,13 +69,13 @@ class RegistrationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        authViewModel.userMutableLiveData.observe(viewLifecycleOwner, Observer {
-            if(it !=null){
+        authViewModel.userMutableLiveData.observe(viewLifecycleOwner) {
+            if (it != null) {
                 findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
-            }else{
-                Toast.makeText(activity,"user is logout",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(activity, "user is logout", Toast.LENGTH_SHORT).show()
             }
-        })
+        }
     }
 
 
@@ -95,8 +91,8 @@ class RegistrationFragment : Fragment() {
     }
 
 
-     suspend fun OptionsSignUp() {
-        var signUpIntent= AuthUI.getInstance()
+     private suspend fun optionsSignUp() {
+        val signUpIntent= AuthUI.getInstance()
             .createSignInIntentBuilder()
             .setAvailableProviders(providers)
             .build()
@@ -105,16 +101,16 @@ class RegistrationFragment : Fragment() {
          }
     }
 
-    var signUpLauncher=registerForActivityResult(FirebaseAuthUIActivityResultContract()){
+    private var signUpLauncher=registerForActivityResult(FirebaseAuthUIActivityResultContract()){
         onSignUpResult(it)
-        Log.d("RESU", ":${it.resultCode} ")
+        Log.d("RESULT", ":${it.resultCode} ")
     }
 
-    fun onSignUpResult(result: FirebaseAuthUIAuthenticationResult) {
+    private fun onSignUpResult(result: FirebaseAuthUIAuthenticationResult) {
         if(result.resultCode==Activity.RESULT_OK){
             authViewModel.addCurrentUser()
         }else{
-            Log.d("RESU", "onSignUpResult: ${result.resultCode} ")
+            Log.d("RESULT", "onSignUpResult: ${result.resultCode} ")
             Toast.makeText(context,"Authentication Failed", Toast.LENGTH_SHORT).show()
         }
 
@@ -123,7 +119,7 @@ class RegistrationFragment : Fragment() {
 
 
 
-    private fun initalizeUI(view: View) {
+    private fun initializeUI(view: View) {
         signInLink = view.findViewById(R.id.tvSignInLink)
         userName = view.findViewById(R.id.etUserName)
         emailAddress = view.findViewById(R.id.etEmail)

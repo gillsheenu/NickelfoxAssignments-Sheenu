@@ -9,7 +9,7 @@
         android:layout_height="150dp"
         android:id="@+id/IVViewpagerImages"
         android:background="@drawable/circular_images"
-        />
+        android:contentDescription="@string/circular_image" />
 
 
 </LinearLayout>

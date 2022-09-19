@@ -1,20 +1,15 @@
-package com.example.nickelffoxassignments_sheenu.Auth
+package com.example.nickelffoxassignments_sheenu.auth
 
-import android.app.Activity
-import android.app.Activity.RESULT_OK
+
 import android.app.Application
-import android.app.appsearch.AppSearchResult
+
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-
 import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.crashlytics.internal.model.CrashlyticsReport
+
 
 class AuthenticationRepository(var application: Application) {
 
@@ -22,7 +17,7 @@ class AuthenticationRepository(var application: Application) {
 
     var loggedMutableLiveData = MutableLiveData<Boolean>()
 
-    var firebaseAuth = FirebaseAuth.getInstance()
+    private var firebaseAuth = FirebaseAuth.getInstance()
 
 
     init {

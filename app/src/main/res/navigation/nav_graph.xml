@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.example.nickelffoxassignments_sheenu.Auth.RegistrationFragment"
+        android:name="com.example.nickelffoxassignments_sheenu.auth.RegistrationFragment"
         android:label="Registration"
         tools:layout="@layout/fragment_registration" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment2"
-        android:name="com.example.nickelffoxassignments_sheenu.Auth.LoginFragment"
+        android:name="com.example.nickelffoxassignments_sheenu.auth.LoginFragment"
         android:label="Login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -74,17 +74,18 @@
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.example.nickelffoxassignments_sheenu.NewsFragment"
+        android:name="com.example.nickelffoxassignments_sheenu.news.NewsFragment"
         android:label="News"
         tools:layout="@layout/fragment_news" />
     <fragment
         android:id="@+id/musicPlayerFragment"
         android:name="com.example.nickelffoxassignments_sheenu.MusicPlayerFragment"
-        android:label="MusicPlayerr"
+        android:label="MusicPlayer"
         tools:layout="@layout/fragment_music_player" />
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.example.nickelffoxassignments_sheenu.calculator.HistoryFragment"
         android:label="CalculationHistory "
         tools:layout="@layout/fragment_history" />
+
 </navigation>
