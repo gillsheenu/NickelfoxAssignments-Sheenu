@@ -12,7 +12,7 @@ import com.example.nickelffoxassignments_sheenu.R
 
 class NewsLoaderAdapter:LoadStateAdapter<NewsLoaderAdapter.LoaderViewHolder>() {
     class LoaderViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
-        val progressBar=itemView.findViewById<ProgressBar>(R.id.progressBar)
+        private val progressBar=itemView.findViewById<ProgressBar>(R.id.progressBar)
         fun bind(loadState: LoadState){
             progressBar.isVisible=loadState is LoadState.Loading
         }

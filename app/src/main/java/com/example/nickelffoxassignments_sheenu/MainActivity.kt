@@ -17,7 +17,6 @@ import com.example.nickelffoxassignments_sheenu.auth.AuthViewModel
 import com.example.nickelffoxassignments_sheenu.auth.AuthViewModelFactory
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 
 @ExperimentalPagingApi
 @AndroidEntryPoint

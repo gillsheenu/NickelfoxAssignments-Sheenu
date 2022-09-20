@@ -1,5 +1,7 @@
-package com.example.nickelffoxassignments_sheenu.news
+package com.example.nickelffoxassignments_sheenu.news.module
 
+import com.example.nickelffoxassignments_sheenu.news.Constants
+import com.example.nickelffoxassignments_sheenu.news.NewsService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,7 +25,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun providesNewsService(retrofit: Retrofit):NewsService{
+    fun providesNewsService(retrofit: Retrofit): NewsService {
         return retrofit.create(NewsService::class.java)
     }
 

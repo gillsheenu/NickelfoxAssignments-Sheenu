@@ -45,4 +45,6 @@
     <string name="twitter">twitter</string>
     <string name="circular_image">Circular_Image</string>
     <string name="logout">Logout</string>
+    <string name="news_image">newsImage</string>
+    <string name="menu_text">…</string>
 </resources>

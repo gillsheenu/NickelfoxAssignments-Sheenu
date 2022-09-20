@@ -1,4 +1,4 @@
-package com.example.nickelffoxassignments_sheenu.news
+package com.example.nickelffoxassignments_sheenu.news.models
 
 import com.example.nickelffoxassignments_sheenu.news.db.Article
 

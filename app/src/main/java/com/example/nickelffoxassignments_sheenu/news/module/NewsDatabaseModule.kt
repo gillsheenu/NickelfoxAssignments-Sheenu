@@ -1,4 +1,4 @@
-package com.example.nickelffoxassignments_sheenu
+package com.example.nickelffoxassignments_sheenu.news.module
 
 import android.content.Context
 import androidx.room.Room

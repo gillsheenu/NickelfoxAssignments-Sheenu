@@ -2,7 +2,7 @@ package com.example.nickelffoxassignments_sheenu.news.paging
 
 import androidx.paging.*
 import androidx.room.withTransaction
-import com.example.nickelffoxassignments_sheenu.news.News
+import com.example.nickelffoxassignments_sheenu.news.models.News
 import com.example.nickelffoxassignments_sheenu.news.db.NewsDatabase
 import com.example.nickelffoxassignments_sheenu.news.NewsService
 import com.example.nickelffoxassignments_sheenu.news.db.Article
@@ -12,16 +12,16 @@ import com.example.nickelffoxassignments_sheenu.news.db.RemoteKeysDao
 import retrofit2.Response
 
 @OptIn(ExperimentalPagingApi::class)
-class NewsRemoteMediator(val newsService: NewsService, val newsDatabase: NewsDatabase, val funType:String, val query:String):RemoteMediator<Int, Article>(){
+class NewsRemoteMediator(private val newsService: NewsService, val newsDatabase: NewsDatabase, private val funType:String, val query:String):RemoteMediator<Int, Article>(){
 
-    lateinit var articleDao: ArticleDao
-    lateinit var remoteKeysDao: RemoteKeysDao
-    var response: Response<News>? =null
+    private lateinit var articleDao: ArticleDao
+    private lateinit var remoteKeysDao: RemoteKeysDao
+    private var response: Response<News>? =null
 
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Article>): MediatorResult {
 
        return try{
-            var currentPage=when(loadType){
+            val currentPage=when(loadType){
                 LoadType.REFRESH->{
                     val remoteKeys=getRemoteKeyClosetToCurrentPosition(state)
                     remoteKeys?.nexKey?.minus(1)?:1
@@ -83,7 +83,7 @@ class NewsRemoteMediator(val newsService: NewsService, val newsDatabase: NewsDat
 
     }
 
-    suspend fun getRemoteKeyClosetToCurrentPosition(state: PagingState<Int, Article>): RemoteKeys? {
+    private suspend fun getRemoteKeyClosetToCurrentPosition(state: PagingState<Int, Article>): RemoteKeys? {
          return state.anchorPosition?.let{ position->
              state.closestItemToPosition(position)?.url?.let { url->
                  remoteKeysDao.getRemoteKeys(url=url)
@@ -93,7 +93,7 @@ class NewsRemoteMediator(val newsService: NewsService, val newsDatabase: NewsDat
          }
     }
 
-    suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Article>): RemoteKeys? {
+    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Article>): RemoteKeys? {
         return state.pages.firstOrNull{it.data.isEmpty()}?.data?.firstOrNull()
             ?.let {
                     article ->
@@ -102,7 +102,7 @@ class NewsRemoteMediator(val newsService: NewsService, val newsDatabase: NewsDat
     }
 
 
-    suspend fun getRemoteKeyForLastItem(state: PagingState<Int, Article>): RemoteKeys? {
+    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, Article>): RemoteKeys? {
         return state.pages.lastOrNull{it.data.isEmpty()}?.data?.lastOrNull()
             ?.let {
                 article ->

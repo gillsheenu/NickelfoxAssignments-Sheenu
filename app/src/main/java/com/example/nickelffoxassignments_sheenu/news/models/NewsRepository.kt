@@ -1,16 +1,18 @@
-package com.example.nickelffoxassignments_sheenu.news
+package com.example.nickelffoxassignments_sheenu.news.models
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.liveData
+import com.example.nickelffoxassignments_sheenu.news.NewsService
+import com.example.nickelffoxassignments_sheenu.news.db.Bookmark
 import com.example.nickelffoxassignments_sheenu.news.db.NewsDatabase
 import com.example.nickelffoxassignments_sheenu.news.paging.NewsPagingSource
 import com.example.nickelffoxassignments_sheenu.news.paging.NewsRemoteMediator
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-class NewsRepository @Inject constructor(var newsService: NewsService, var newsDatabase: NewsDatabase) {
+class NewsRepository @Inject constructor(private var newsService: NewsService, var newsDatabase: NewsDatabase) {
 
 
 
@@ -37,6 +39,13 @@ class NewsRepository @Inject constructor(var newsService: NewsService, var newsD
         remoteMediator = NewsRemoteMediator(newsService,newsDatabase,"TopCategoryHeadlines",query),
         pagingSourceFactory = { NewsPagingSource(newsService,"TopCategoryHeadlines",query) }
     ).liveData
+
+    suspend fun insertBookmarks(article: Bookmark){
+        newsDatabase.getBookmarkDAO().insertArticles(article)
+    }
+    fun getBookmark(){
+        newsDatabase.getBookmarkDAO().getArticles()
+    }
 
 
 //    fun getSearchNews( query:String)= Pager(

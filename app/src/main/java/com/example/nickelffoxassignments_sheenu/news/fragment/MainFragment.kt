@@ -1,4 +1,4 @@
-package com.example.nickelffoxassignments_sheenu
+package com.example.nickelffoxassignments_sheenu.news.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -9,6 +9,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.paging.ExperimentalPagingApi
 import androidx.viewpager2.widget.ViewPager2
+import com.example.nickelffoxassignments_sheenu.MainActivity
+import com.example.nickelffoxassignments_sheenu.R
+import com.example.nickelffoxassignments_sheenu.ViewPagerAdapter
 
 @ExperimentalPagingApi
 class MainFragment : Fragment() {
@@ -89,10 +92,18 @@ class MainFragment : Fragment() {
 
     private fun updateBgColor() {
         when(viewPager.currentItem){
-            0-> viewPager.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.calculator_color))
-            1->viewPager.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.stopWatch_color))
-            2->viewPager.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.news_color))
-            3->viewPager.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.musicPlayer_color))
+            0-> viewPager.setBackgroundColor(ContextCompat.getColor(requireContext(),
+                R.color.calculator_color
+            ))
+            1->viewPager.setBackgroundColor(ContextCompat.getColor(requireContext(),
+                R.color.stopWatch_color
+            ))
+            2->viewPager.setBackgroundColor(ContextCompat.getColor(requireContext(),
+                R.color.news_color
+            ))
+            3->viewPager.setBackgroundColor(ContextCompat.getColor(requireContext(),
+                R.color.musicPlayer_color
+            ))
 
         }
     }

@@ -1,11 +1,10 @@
-package com.example.nickelffoxassignments_sheenu.news
+package com.example.nickelffoxassignments_sheenu.news.models
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
-import retrofit2.http.Query
 import javax.inject.Inject
 
 @ExperimentalPagingApi
@@ -13,13 +12,20 @@ import javax.inject.Inject
 class NewsViewModel @Inject constructor(var repository: NewsRepository):ViewModel() {
 
 
-    fun SearchNews(query:String)=repository.getSearchNews(query).cachedIn(viewModelScope)
+    fun searchNews(query:String)=repository.getSearchNews(query).cachedIn(viewModelScope)
 
-    fun TopNews(query:String)=repository.getTopNews(query).cachedIn(viewModelScope)
+    fun topNews(query:String)=repository.getTopNews(query).cachedIn(viewModelScope)
 
-    fun TopSourceNews(query:String)=repository.getTopSourceNews(query).cachedIn(viewModelScope)
+    fun topSourceNews(query:String)=repository.getTopSourceNews(query).cachedIn(viewModelScope)
 
-    fun TopCategoryNews(query:String)=repository.getTopCategoryNews(query).cachedIn(viewModelScope)
+    fun topCategoryNews(query:String)=repository.getTopCategoryNews(query).cachedIn(viewModelScope)
+
+//    suspend fun insertBookmark(bookmark:Bookmark){
+//        repository.insertBookmarks(bookmark)
+//    }
+//    fun getBookmark(){
+//        repository.getBookmark()
+//    }
 
 
 
