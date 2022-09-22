@@ -47,4 +47,8 @@
     <string name="logout">Logout</string>
     <string name="news_image">newsImage</string>
     <string name="menu_text">…</string>
+    <string name="selectedImage">selectedImage</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="success">Success :</string>
+    <string name="status_code">Status Code :</string>
 </resources>

@@ -79,9 +79,9 @@
         tools:layout="@layout/fragment_news" />
     <fragment
         android:id="@+id/musicPlayerFragment"
-        android:name="com.example.nickelffoxassignments_sheenu.MusicPlayerFragment"
+        android:name="com.example.nickelffoxassignments_sheenu.UploadImageFragment"
         android:label="MusicPlayer"
-        tools:layout="@layout/fragment_music_player" />
+        tools:layout="@layout/fragment_upload_image" />
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.example.nickelffoxassignments_sheenu.calculator.HistoryFragment"
