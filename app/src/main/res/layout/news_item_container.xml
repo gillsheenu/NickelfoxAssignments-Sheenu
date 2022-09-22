@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="20dp"
+
+    app:cardMaxElevation="25dp"
+    app:cardCornerRadius="8dp"
+    app:cardPreventCornerOverlap="true"
+    android:layout_margin="5dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F2F7EE">
+
+        <ImageView
+            android:id="@+id/ivNewsImage"
+            android:layout_width="140dp"
+            android:layout_height="180dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/news_image"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp"
+            app:layout_constraintStart_toEndOf="@id/ivNewsImage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <TextView
+                android:id="@+id/newTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:textStyle="bold"
+                android:fontFamily="@font/sf_pro_medium"
+                android:textColor="#180E19"
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/newAuthor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/sf_pro_medium"
+                android:textColor="#909090"
+                android:textSize="13sp"/>
+        </LinearLayout>
+         <LinearLayout
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:id="@+id/lySource"
+             android:padding="5dp"
+             android:orientation="horizontal"
+             app:layout_constraintStart_toEndOf="@id/ivNewsImage"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintBottom_toBottomOf="@id/ivNewsImage">
+             <TextView
+                 android:id="@+id/newsCategory"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textColor="@color/news_color"
+                 android:padding="5dp"
+                 android:textSize="13sp"
+                 android:textStyle="bold"
+                 android:fontFamily="@font/sf_pro_medium"/>
+             <TextView
+                 android:layout_width="6dp"
+                 android:layout_height="6dp"
+                 android:layout_gravity="center"
+                 android:background="@drawable/eclipse_background"
+                 android:padding="5dp"/>
+
+
+         </LinearLayout>
+        <TextView
+            android:id="@+id/contextMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#909090"
+
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingBottom="20dp"
+            android:padding="10dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/menu_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/lySource"
+            app:layout_constraintTop_toTopOf="@id/lySource"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/sf_pro_medium"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

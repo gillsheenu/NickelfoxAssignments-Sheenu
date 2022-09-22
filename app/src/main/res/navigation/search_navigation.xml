@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search_navigation"
+    app:startDestination="@id/newsHomeFragment">
+    <fragment
+        android:id="@+id/newsHomeFragment"
+        android:name="com.example.nickelffoxassignments_sheenu.news.fragment.NewsHomeFragment"
+        android:label="fragment_news_home"
+        tools:layout="@layout/fragment_news_home" >
+
+
+        <action
+            android:id="@+id/action_newsHomeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsSearchFragment"
+        android:name="com.example.nickelffoxassignments_sheenu.news.fragment.NewsSearchFragment"
+        android:label="fragment_news_search"
+        tools:layout="@layout/fragment_news_search" >
+
+        <action
+            android:id="@+id/action_newsSearchFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsBookmarkFragment"
+        android:name="com.example.nickelffoxassignments_sheenu.news.fragment.NewsBookmarkFragment"
+        android:label="fragment_news_bookmark"
+        tools:layout="@layout/fragment_news_bookmark" >
+        <action
+            android:id="@+id/action_newsBookmarkFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.nickelffoxassignments_sheenu.news.fragment.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="url"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+</navigation>

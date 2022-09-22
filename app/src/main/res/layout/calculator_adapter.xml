@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tvId"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="#00688B"
+        android:fontFamily="@font/roboto_bold"
+        android:padding="10dp"
+        android:layout_marginStart="10dp"/>
+    <TextView
+        android:id="@+id/tvExpression"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="#00688B"
+        android:fontFamily="@font/roboto_medium"
+        android:padding="10dp"/>
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="textStart"
+        android:textSize="20sp"
+        android:textColor="#00688B"
+        android:fontFamily="@font/roboto_medium_italic"
+        android:padding="10dp"/>
+
+
+</LinearLayout>

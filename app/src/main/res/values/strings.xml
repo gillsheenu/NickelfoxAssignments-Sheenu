@@ -1,3 +1,54 @@
 <resources>
     <string name="app_name">NickelfFoxAssignments-Sheenu</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="string_register_header">Create Your Account</string>
+    <string name="string_register_subHeader">Please provide the required information*</string>
+    <string name="string_username">UserName</string>
+    <string name="string_email">Email Address</string>
+    <string name="string_password">Password</string>
+    <string name="string_sign_up">Sign Up</string>
+    <string name="string_sign_in_link">Already Have An Account? <font color="#E91E63">Sign In</font></string>
+    <string name="string_options">Other SignUp Options</string>
+    <string name="string_login_header">Welcome Back!</string>
+    <string name="string_login_subHeader">Login to access your account</string>
+    <string name="string_login">LogIn</string>
+    <string name="string_signup_link">Don\'t have an account? <font color="#E91E63">Register Now</font></string>
+    <string name="string_signIn_options">other Options<font color="#E91E63"> Click Here</font></string>
+    <string name="equals_sign">=</string>
+    <string name="history">History</string>
+    <string name="ac">AC</string>
+    <string name="c">C</string>
+    <string name="Percentage">%</string>
+    <string name="Division">/</string>
+    <string name="multiplication">*</string>
+    <string name="subtraction">-</string>
+    <string name="addition">+</string>
+    <string name="Equals">=</string>
+    <string name="_1">1</string>
+    <string name="_4">4</string>
+    <string name="_7">7</string>
+    <string name="decimal">.</string>
+    <string name="_2">2</string>
+    <string name="_5">5</string>
+    <string name="_8">8</string>
+    <string name="_0">0</string>
+    <string name="_3">3</string>
+    <string name="_6">6</string>
+    <string name="_9">9</string>
+    <string name="_00">00</string>
+    <string name="education">education</string>
+    <string name="history_1">HISTORY</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="instagram">instagram</string>
+    <string name="twitter">twitter</string>
+    <string name="circular_image">Circular_Image</string>
+    <string name="logout">Logout</string>
+    <string name="news_image">newsImage</string>
+    <string name="menu_text">…</string>
+    <string name="selectedImage">selectedImage</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="success">Success :</string>
+    <string name="status_code">Status Code :</string>
 </resources>

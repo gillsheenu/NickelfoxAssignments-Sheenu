@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DBF6FA"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".calculator.CalculatorFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:id="@+id/rlCalculation"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintStart_toStartOf="@id/calculator"
+        app:layout_constraintEnd_toEndOf="@id/calculator"
+        app:layout_constraintBottom_toTopOf="@id/calculator">
+
+        <TextView
+            android:id="@+id/tvScreenResult"
+            android:layout_width="165dp"
+            android:layout_height="70dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="end|center_vertical"
+            android:textColor="#00688B"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:id="@+id/tvScreenEquals"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:text="@string/equals_sign"
+            android:textColor="#00688B"
+            android:textSize="26sp" />
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tvScreenCalculation"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="30sp"
+        android:textColor="#00688B"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center_vertical|end"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintEnd_toEndOf="@id/rlCalculation"
+        app:layout_constraintBottom_toTopOf="@id/rlCalculation" />
+
+    <ImageView
+        android:id="@+id/IVHistory"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:src="@drawable/ic_baseline_history_24"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="40dp"
+        android:contentDescription="@string/history" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/calculator"
+        android:layout_marginTop="240dp"
+        android:padding="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center"
+        android:elevation="70dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="23dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/background_color" />
+        <View
+            android:layout_width="62dp"
+            android:layout_height="5dp"
+            android:background="#373737"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="33dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
+        <View
+            android:layout_width="130dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="124dp"
+            android:layout_marginBottom="20dp"
+            android:background="#116F99"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            />
+
+        <RelativeLayout
+            android:id="@+id/subRelative"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/viewAddition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/layout_background"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvAllClear"
+                    style="@style/calculator_textview"
+                    android:text="@string/ac" />
+
+                <TextView
+                    android:id="@+id/tvClear"
+                    style="@style/calculator_textview"
+                    android:layout_marginStart="23dp"
+                    android:text="@string/c" />
+
+                <TextView
+                    android:id="@+id/tvPercentage"
+                    style="@style/calculator_textview"
+                    android:layout_marginStart="23dp"
+                    android:text="@string/Percentage" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/viewDivision"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="23dp"
+                android:layout_toEndOf="@id/viewAddition"
+                android:background="@drawable/layout_background"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvDivision"
+                    style="@style/calculator_textview"
+                    android:text="@string/Division" />
+
+                <TextView
+                    android:id="@+id/tvMultiplication"
+                    style="@style/calculator_textview"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/multiplication" />
+
+                <TextView
+                    android:id="@+id/tvSubtraction"
+                    style="@style/calculator_textview"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/subtraction" />
+
+                <TextView
+                    android:id="@+id/tvAddition"
+                    style="@style/calculator_textview"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/addition" />
+
+                <TextView
+                    android:id="@+id/tvEquals"
+                    style="@style/calculator_textview"
+                    android:layout_marginTop="18dp"
+                    android:background="@drawable/circular_textview"
+                    android:text="@string/Equals" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tvOne"
+                style="@style/calculator_textview"
+                android:layout_below="@id/viewAddition"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/circular_textview"
+                android:text="@string/_1" />
+
+            <TextView
+                android:id="@+id/tvFour"
+                style="@style/calculator_textview"
+                android:layout_below="@id/tvOne"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/circular_textview"
+                android:text="@string/_4" />
+
+            <TextView
+                android:id="@+id/tvSeven"
+                style="@style/calculator_textview"
+                android:layout_below="@id/tvFour"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/circular_textview"
+                android:text="@string/_7" />
+
+            <TextView
+                android:id="@+id/tvDecimal"
+                style="@style/calculator_textview"
+                android:layout_below="@id/tvSeven"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/circular_textview"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/decimal"
+                android:textColor="#0097A7" />
+
+            <TextView
+                android:id="@+id/tvTwo"
+                style="@style/calculator_textview"
+                android:layout_below="@id/viewAddition"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="18dp"
+                android:layout_toEndOf="@id/tvOne"
+                android:background="@drawable/circular_textview"
+                android:text="@string/_2"
+                android:textColor="#00688B"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/tvFive"
+                style="@style/calculator_textview"
+                android:layout_below="@id/tvTwo"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="18dp"
+                android:layout_toEndOf="@id/tvFour"
+                android:background="@drawable/circular_textview"
+                android:text="@string/_5" />
+
+            <TextView
+                android:id="@+id/tvEight"
+                style="@style/calculator_textview"
+                android:layout_below="@id/tvFive"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="18dp"
+                android:layout_toEndOf="@id/tvSeven"
+                android:background="@drawable/circular_textview"
+                android:text="@string/_8" />
+
+            <TextView
+                android:id="@+id/tvZero"
+                style="@style/calculator_textview"
+                android:layout_below="@id/tvEight"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="18dp"
+                android:layout_toEndOf="@id/tvDecimal"
+                android:background="@drawable/circular_textview"
+                android:text="@string/_0" />
+
+            <TextView
+                android:id="@+id/tvThree"
+                style="@style/calculator_textview"
+                android:layout_below="@id/viewAddition"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="18dp"
+                android:layout_toEndOf="@id/tvTwo"
+                android:background="@drawable/circular_textview"
+                android:text="@string/_3" />
+
+            <TextView
+                android:id="@+id/tvSix"
+                style="@style/calculator_textview"
+                android:layout_below="@id/tvThree"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="18dp"
+                android:layout_toEndOf="@id/tvFive"
+                android:background="@drawable/circular_textview"
+                android:text="@string/_6" />
+
+            <TextView
+                android:id="@+id/tvNine"
+                style="@style/calculator_textview"
+                android:layout_below="@id/tvSix"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="18dp"
+                android:layout_toEndOf="@id/tvEight"
+                android:background="@drawable/circular_textview"
+                android:text="@string/_9" />
+
+            <TextView
+                android:id="@+id/tvDoubleZero"
+                style="@style/calculator_textview"
+                android:layout_below="@id/tvNine"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="18dp"
+                android:layout_toEndOf="@id/tvZero"
+                android:background="@drawable/circular_textview"
+                android:text="@string/_00" />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

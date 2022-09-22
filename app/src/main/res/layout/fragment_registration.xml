@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".auth.RegistrationFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/string_register_header"
+            android:fontFamily="@font/roboto_bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/string_register_subHeader"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"/>
+
+        <TextView
+            style="@style/TextView_Style"
+            android:layout_marginTop="20dp"
+            android:text="@string/string_username"/>
+
+        <EditText
+            android:id="@+id/etUserName"
+            android:hint="@string/string_username"
+            android:inputType="text"
+            android:imeOptions="actionNext"
+            android:background="@drawable/edit_text_background"
+            style="@style/EditText_Style"
+            android:autofillHints="username" />
+
+        <TextView
+            android:text="@string/string_email"
+            style="@style/TextView_Style" />
+
+
+        <EditText
+            style="@style/EditText_Style"
+            android:inputType="textEmailAddress"
+            android:id="@+id/etEmail"
+            android:imeOptions="actionNext"
+            android:background="@drawable/edit_text_background"
+            android:hint="@string/string_email"
+            android:autofillHints="emailAddress" />
+
+        <TextView
+            style="@style/TextView_Style"
+            android:text="@string/string_password" />
+
+        <EditText
+            style="@style/EditText_Style"
+            android:inputType="textPassword"
+            android:id="@+id/etPassword"
+            android:imeOptions="actionDone"
+            android:background="@drawable/edit_text_background"
+            android:hint="@string/string_password"
+            android:autofillHints="Password" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="#008CEA"
+            android:background="@drawable/button_background"
+            android:textSize="16sp"
+            android:id="@+id/btnSignUp"
+            android:text="@string/string_sign_up"/>
+        <TextView
+            style="@style/TextView_Style"
+            android:id="@+id/tvSignInLink"
+            android:fontFamily="@font/roboto_medium_italic"
+            android:text="@string/string_sign_in_link"
+            android:gravity="center" />
+
+        <View android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/colorPrimaryDark"/>
+
+        <TextView
+            style="@style/TextView_Style"
+            android:id="@+id/tvOptionClick"
+            android:fontFamily="@font/roboto_light_italic"
+            android:text="@string/string_signIn_options"
+            android:gravity="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center">
+
+
+            <ImageView
+                style="@style/registration_ImageView_style"
+                android:id="@+id/IVGoogle"
+                android:src="@drawable/google"
+                android:contentDescription="@string/google" />
+
+            <ImageView
+                android:id="@+id/IVFacebook"
+                android:src="@drawable/facebook"
+                style="@style/registration_ImageView_style"
+                android:contentDescription="@string/facebook" />
+
+            <ImageView
+                style="@style/registration_ImageView_style"
+                android:id="@+id/IVInsta"
+                android:src="@drawable/instagram"
+                android:contentDescription="@string/instagram" />
+            <ImageView
+                style="@style/registration_ImageView_style"
+                android:id="@+id/IVTwitter"
+                android:src="@drawable/twitter"
+                android:contentDescription="@string/twitter" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</ScrollView>
