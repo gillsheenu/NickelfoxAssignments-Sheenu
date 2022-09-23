@@ -16,6 +16,8 @@
 <!--    <color name="calculator_color">#D79A9A</color>-->
     <color name="calculator_color">#1299BB</color>
     <color name="stopWatch_color">#8B864E</color>
+    <color name="new_stop_watch_color">#202020</color>
     <color name="news_color">#CAC7</color>
     <color name="musicPlayer_color">#DBDB70</color>
+    <color name="gradient_color">@color/stop_watch_gradient</color>
 </resources>

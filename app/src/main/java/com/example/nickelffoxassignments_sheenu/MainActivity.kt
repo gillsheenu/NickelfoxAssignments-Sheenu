@@ -1,10 +1,12 @@
 package com.example.nickelffoxassignments_sheenu
 
+import android.os.Build
 import androidx.core.content.ContextCompat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
+import android.view.WindowInsets.*
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
@@ -85,8 +87,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.stopWatchFragment -> {
                     setColorEnabled = true
-                    setAppBarColor(R.color.stopWatch_color)
+                    setAppBarColor(R.color.new_stop_watch_color)
                     supportActionBar?.setDisplayHomeAsUpEnabled(false)
+                    supportActionBar?.title=""
                 }
                 R.id.newsFragment -> {
                     setColorEnabled = true
