@@ -1,12 +1,18 @@
 package com.example.nickelffoxassignments_sheenu.news
 
+import android.graphics.drawable.Drawable
 import android.view.*
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.nickelffoxassignments_sheenu.R
 import com.example.nickelffoxassignments_sheenu.news.db.Bookmark
 import com.example.nickelffoxassignments_sheenu.news.models.RecyclerListener
@@ -19,9 +25,33 @@ class NewsAdapter:ListAdapter<Bookmark,NewsAdapter.ViewHolder>(NewsDiffUtilCallb
         var newsTitle= itemView.findViewById<TextView>(R.id.newTitle)!!
         private var newsAuthor=itemView.findViewById<TextView>(R.id.newAuthor)
         private var newsSource=itemView.findViewById<TextView>(R.id.newsCategory)
+        private var progressbar=itemView.findViewById<ProgressBar>(R.id.newsProgressBar)
         var newsMenu= itemView.findViewById<TextView>(R.id.contextMenu)!!
         fun bind(item: Bookmark){
-            Glide.with(itemView).load(item.urlToImage).into(newsImage)
+            Glide.with(itemView).load(item.urlToImage)
+                .listener(object : RequestListener<Drawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        progressbar.visibility = View.GONE
+                        return false
+                    }
+
+                    override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        progressbar.visibility = View.GONE
+
+                        return false
+                    }
+                }).into(newsImage)
             newsTitle.text=item.title
             newsAuthor.text=item.author
             newsSource.text=item.source

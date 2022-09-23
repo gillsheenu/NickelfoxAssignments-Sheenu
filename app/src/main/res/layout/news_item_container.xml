@@ -22,6 +22,15 @@
             app:layout_constraintStart_toStartOf="parent"
             android:scaleType="centerCrop"
             android:contentDescription="@string/news_image"/>
+        <ProgressBar
+            android:id="@+id/newsProgressBar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/ivNewsImage"
+            app:layout_constraintBottom_toBottomOf="@id/ivNewsImage"/>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
