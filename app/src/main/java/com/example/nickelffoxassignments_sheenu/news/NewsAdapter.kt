@@ -27,6 +27,7 @@ class NewsAdapter:ListAdapter<Bookmark,NewsAdapter.ViewHolder>(NewsDiffUtilCallb
         private var newsSource=itemView.findViewById<TextView>(R.id.newsCategory)
         private var progressbar=itemView.findViewById<ProgressBar>(R.id.newsProgressBar)
         var newsMenu= itemView.findViewById<TextView>(R.id.contextMenu)!!
+
         fun bind(item: Bookmark){
             Glide.with(itemView).load(item.urlToImage)
                 .listener(object : RequestListener<Drawable> {

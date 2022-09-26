@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,15 +8,20 @@
     tools:context=".news.fragment.NewsHomeFragment">
 
     <HorizontalScrollView
+        android:id="@+id/hvScrollview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:singleLine="true"
+        app:checkedChip="@id/chipForYou"
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
@@ -24,43 +29,68 @@
             android:id="@+id/chipForYou"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="For You"/>
+            android:text="@string/for_you"/>
 
         <com.google.android.material.chip.Chip
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:id="@+id/chipTop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Top"/>
+            android:text="@string/top"/>
 
         <com.google.android.material.chip.Chip
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:id="@+id/chipWorld"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="World"/>
+            android:text="@string/world"/>
 
         <com.google.android.material.chip.Chip
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:id="@+id/chipSports"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Politics"/>
+            android:text="@string/politics"/>
 
         <com.google.android.material.chip.Chip
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:id="@+id/chipEntertainment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Entertainment"/>
+            android:text="@string/entertainment"/>
 
     </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/NewsRoot"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        <ProgressBar
+            android:id="@+id/pgNewHome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/NewsRoot"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hvScrollview"/>
+        <ImageView
+            android:id="@+id/emptyView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+           android:src="@drawable/no_internet"
+            android:visibility="gone"
+            android:contentDescription="@string/emptyView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hvScrollview" />
 
-</LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

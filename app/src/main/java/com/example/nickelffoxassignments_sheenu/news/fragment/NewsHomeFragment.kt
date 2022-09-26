@@ -3,6 +3,9 @@ package com.example.nickelffoxassignments_sheenu.news.fragment
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
@@ -15,6 +18,7 @@ import com.example.nickelffoxassignments_sheenu.news.paging.NewsPagingAdapter
 import com.example.nickelffoxassignments_sheenu.news.models.NewsViewModel
 import com.example.nickelffoxassignments_sheenu.news.models.RecyclerListener
 import com.example.nickelffoxassignments_sheenu.news.db.Bookmark
+import com.example.nickelffoxassignments_sheenu.news.models.ConnectionLiveData
 import com.google.android.material.chip.ChipGroup
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -30,11 +34,29 @@ class NewsHomeFragment : Fragment(), RecyclerListener {
 //    lateinit var newsAdapter: NewsAdapter
      private lateinit var newsAdapter: NewsPagingAdapter
     private lateinit var newsViewModel: NewsViewModel
+    private lateinit var newsHomeProgressBar:ProgressBar
+    private lateinit var emptyTextView: ImageView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view=inflater.inflate(R.layout.fragment_news_home, container, false)
+
+        val connectionLiveData= ConnectionLiveData(requireActivity().applicationContext )
+
+        emptyTextView=view.findViewById(R.id.emptyView)
+        newsHomeProgressBar=view.findViewById(R.id.pgNewHome)
+        newsRecycler=view.findViewById(R.id.NewsRoot)
+        newsHomeProgressBar.visibility=View.VISIBLE
+        newsRecycler.visibility=View.GONE
+
+
         newsViewModel= ViewModelProvider(this@NewsHomeFragment)[NewsViewModel::class.java]
+
+        newsViewModel.topNews(Locale.getDefault().country).observe(viewLifecycleOwner){
+            newsRecycler.visibility=View.VISIBLE
+            newsAdapter.submitData(lifecycle,it)
+
+        }
 
         val chipGroup=view.findViewById<ChipGroup>(R.id.chipGroup)
         chipGroup.setOnCheckedStateChangeListener { group, _ ->
@@ -80,15 +102,32 @@ class NewsHomeFragment : Fragment(), RecyclerListener {
 
 //        newsAdapter=NewsAdapter()
         newsAdapter= NewsPagingAdapter()
-        newsRecycler=view.findViewById(R.id.NewsRoot)
+
         newsAdapter.setListeners(this)
 //        newsViewModel..observe(viewLifecycleOwner, Observer {
 //            newsAdapter.submitList(it.articles)
 //        })
-        newsRecycler.adapter=newsAdapter.withLoadStateHeaderAndFooter(
-            header = NewsLoaderAdapter(),
-            footer = NewsLoaderAdapter()
-        )
+
+        connectionLiveData.observe(viewLifecycleOwner) { availableInfo ->
+            if (!availableInfo) {
+                newsRecycler.visibility = View.GONE
+                newsHomeProgressBar.visibility = View.GONE
+                emptyTextView.visibility = View.VISIBLE
+                Toast.makeText(activity, "NO INTERNET ", Toast.LENGTH_SHORT).show()
+
+            } else {
+                emptyTextView.visibility = View.GONE
+                newsRecycler.visibility = View.VISIBLE
+                newsRecycler.adapter = newsAdapter.withLoadStateHeaderAndFooter(
+                    header = NewsLoaderAdapter(),
+                    footer = NewsLoaderAdapter()
+                )
+
+            }
+
+        }
+
+
         newsRecycler.layoutManager= LinearLayoutManager(activity)
         registerForContextMenu(newsRecycler)
 
@@ -115,6 +154,7 @@ class NewsHomeFragment : Fragment(), RecyclerListener {
         intent.putExtra(Intent.EXTRA_TEXT,url)
         startActivity(Intent.createChooser(intent,"Share Link"))
     }
+
 
 
 }

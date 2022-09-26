@@ -7,9 +7,9 @@ import retrofit2.http.Query
 
 //https://newsapi.org/v2/everything?apiKey=da48a10ea89b4580b1bc0beb63813d7b&q=india
 
-//const val APIKEY="da48a10ea89b4580b1bc0beb63813d7b"
+const val APIKEY="da48a10ea89b4580b1bc0beb63813d7b"
 //const val APIKEY="a96b94650a004defafe34f089c2d967c"
-const val APIKEY="0e9f7305c18a49d9b3329a3eb6ff7a5e"
+//const val APIKEY="0e9f7305c18a49d9b3329a3eb6ff7a5e"
 
 
 interface NewsService {

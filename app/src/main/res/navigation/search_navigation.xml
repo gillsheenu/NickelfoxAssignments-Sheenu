@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/search_navigation"
-    app:startDestination="@id/newsSearchFragment">
+    app:startDestination="@id/newsHomeFragment">
     <fragment
         android:id="@+id/newsSearchFragment"
         android:name="com.example.nickelffoxassignments_sheenu.news.fragment.NewsSearchFragment"

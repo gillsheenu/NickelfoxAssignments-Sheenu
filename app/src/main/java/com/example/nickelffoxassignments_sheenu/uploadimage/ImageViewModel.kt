@@ -11,6 +11,7 @@ class ImageViewModel @Inject constructor(private var repository:UploadImageRepos
     var ImageLiveData=repository.UploadImageLiveData
 
    suspend fun imageUpload(uri: Uri){
+
         repository.uploadSelectedImage(uri)
     }
 }
