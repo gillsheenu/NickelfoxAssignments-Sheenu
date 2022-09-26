@@ -15,7 +15,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.nickelffoxassignments_sheenu.news.models.ConnectionLiveData
+import com.example.nickelffoxassignments_sheenu.news.utils.ConnectionLiveData
 import com.example.nickelffoxassignments_sheenu.uploadimage.ImageViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -30,7 +30,7 @@ class UploadImageFragment : Fragment(){
     private lateinit var imageViewModel: ImageViewModel
     private lateinit var imageSuccessResponse:TextView
     private lateinit var imageStatusCode:TextView
-    lateinit var connectionLiveData:ConnectionLiveData
+    lateinit var connectionLiveData: ConnectionLiveData
     lateinit var uri: Uri
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

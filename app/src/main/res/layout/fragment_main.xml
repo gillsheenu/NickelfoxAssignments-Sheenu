@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".news.fragment.MainFragment">
+    tools:context=".news.ui.view.MainFragment">
 
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"

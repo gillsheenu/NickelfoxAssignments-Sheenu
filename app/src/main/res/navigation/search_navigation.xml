@@ -6,7 +6,7 @@
     app:startDestination="@id/newsHomeFragment">
     <fragment
         android:id="@+id/newsSearchFragment"
-        android:name="com.example.nickelffoxassignments_sheenu.news.fragment.NewsSearchFragment"
+        android:name="com.example.nickelffoxassignments_sheenu.news.ui.view.NewsSearchFragment"
         android:label="Search"
         tools:layout="@layout/fragment_news_search" >
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/newsHomeFragment"
-        android:name="com.example.nickelffoxassignments_sheenu.news.fragment.NewsHomeFragment"
+        android:name="com.example.nickelffoxassignments_sheenu.news.ui.view.NewsHomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_news_home" >
 
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/newsBookmarkFragment"
-        android:name="com.example.nickelffoxassignments_sheenu.news.fragment.NewsBookmarkFragment"
+        android:name="com.example.nickelffoxassignments_sheenu.news.ui.view.NewsBookmarkFragment"
         android:label="fragment_news_bookmark"
         tools:layout="@layout/fragment_news_bookmark" >
         <action
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.nickelffoxassignments_sheenu.news.fragment.DetailFragment"
+        android:name="com.example.nickelffoxassignments_sheenu.news.ui.view.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <argument

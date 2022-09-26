@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.nickelffoxassignments_sheenu.news.fragment.MainFragment"
+        android:name="com.example.nickelffoxassignments_sheenu.news.ui.view.MainFragment"
         android:label="Home"
         tools:layout="@layout/fragment_main" >
 
@@ -74,7 +74,7 @@
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.example.nickelffoxassignments_sheenu.news.fragment.NewsFragment"
+        android:name="com.example.nickelffoxassignments_sheenu.news.ui.view.NewsFragment"
         android:label="News"
         tools:layout="@layout/fragment_news" />
     <fragment

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".news.fragment.NewsBookmarkFragment">
+    tools:context=".news.ui.view.NewsBookmarkFragment">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBookmark"
         android:layout_width="0dp"
