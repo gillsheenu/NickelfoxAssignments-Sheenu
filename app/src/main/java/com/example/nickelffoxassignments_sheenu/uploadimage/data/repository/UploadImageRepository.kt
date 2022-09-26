@@ -1,9 +1,11 @@
-package com.example.nickelffoxassignments_sheenu.uploadimage
+package com.example.nickelffoxassignments_sheenu.uploadimage.data.repository
 
 import android.content.Context
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.nickelffoxassignments_sheenu.uploadimage.data.network.UploadImage
+import com.example.nickelffoxassignments_sheenu.uploadimage.data.network.UploadImageResponse
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -11,7 +13,6 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.Response
 import java.io.File
 import java.io.FileOutputStream
 import javax.inject.Inject

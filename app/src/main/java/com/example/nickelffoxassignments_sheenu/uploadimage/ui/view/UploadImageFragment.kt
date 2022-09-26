@@ -1,5 +1,5 @@
 
-package com.example.nickelffoxassignments_sheenu
+package com.example.nickelffoxassignments_sheenu.uploadimage.ui.view
 
 
 import android.net.Uri
@@ -15,8 +15,9 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.nickelffoxassignments_sheenu.R
 import com.example.nickelffoxassignments_sheenu.news.utils.ConnectionLiveData
-import com.example.nickelffoxassignments_sheenu.uploadimage.ImageViewModel
+import com.example.nickelffoxassignments_sheenu.uploadimage.ui.viewmodel.ImageViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

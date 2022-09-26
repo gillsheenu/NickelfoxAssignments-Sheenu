@@ -1,4 +1,4 @@
-package com.example.nickelffoxassignments_sheenu.uploadimage
+package com.example.nickelffoxassignments_sheenu.uploadimage.data.network
 
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

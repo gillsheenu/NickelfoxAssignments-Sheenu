@@ -2,7 +2,7 @@ package com.example.nickelffoxassignments_sheenu.news.di
 
 import com.example.nickelffoxassignments_sheenu.news.utils.Constants
 import com.example.nickelffoxassignments_sheenu.news.NewsService
-import com.example.nickelffoxassignments_sheenu.uploadimage.UploadImage
+import com.example.nickelffoxassignments_sheenu.uploadimage.data.network.UploadImage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

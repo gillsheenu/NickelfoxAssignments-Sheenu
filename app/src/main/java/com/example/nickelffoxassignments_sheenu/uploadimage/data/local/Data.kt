@@ -1,4 +1,4 @@
-package com.example.nickelffoxassignments_sheenu.uploadimage
+package com.example.nickelffoxassignments_sheenu.uploadimage.data.local
 
 data class Data(
     val account_id: Any,
