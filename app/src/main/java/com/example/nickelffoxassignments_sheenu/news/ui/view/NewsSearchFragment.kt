@@ -62,7 +62,9 @@ class NewsSearchFragment : Fragment(), RecyclerListener {
             } else {
 
                 emptyTextView.visibility = View.GONE
-                newsRecycler.visibility = View.VISIBLE
+//                newsRecycler.visibility = View.GONE
+                searchImage.visibility=View.VISIBLE
+
                 newsRecycler.adapter = newsAdapter.withLoadStateHeaderAndFooter(
                     header = NewsLoaderAdapter(),
                     footer = NewsLoaderAdapter()
@@ -79,13 +81,12 @@ class NewsSearchFragment : Fragment(), RecyclerListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        newsRecycler.visibility=View.GONE
-        searchImage.visibility=View.VISIBLE
 
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
+                newsRecycler.visibility=View.VISIBLE
                 searchView.clearFocus()
                 return true
             }
@@ -93,7 +94,7 @@ class NewsSearchFragment : Fragment(), RecyclerListener {
             override fun onQueryTextChange(newText: String?): Boolean {
 
                 if (newText != null) {
-                    searchImage.visibility=View.GONE
+//                    searchImage.visibility=View.GONE
                     newsRecycler.visibility=View.VISIBLE
 ////                        newsViewModel.search(newText)
                     newsViewModel.searchNews(newText).observe(viewLifecycleOwner) {

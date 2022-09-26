@@ -4,11 +4,12 @@ import androidx.paging.*
 import androidx.room.withTransaction
 import com.example.nickelffoxassignments_sheenu.news.data.local.News
 import com.example.nickelffoxassignments_sheenu.news.data.dao.NewsDatabase
-import com.example.nickelffoxassignments_sheenu.news.NewsService
+
 import com.example.nickelffoxassignments_sheenu.news.data.local.Article
 import com.example.nickelffoxassignments_sheenu.news.data.dao.ArticleDao
 import com.example.nickelffoxassignments_sheenu.news.data.local.RemoteKeys
 import com.example.nickelffoxassignments_sheenu.news.data.dao.RemoteKeysDao
+import com.example.nickelffoxassignments_sheenu.news.data.network.NewsService
 import retrofit2.Response
 
 @OptIn(ExperimentalPagingApi::class)
