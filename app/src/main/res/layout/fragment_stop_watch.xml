@@ -17,7 +17,7 @@
         android:layout_marginTop="45dp"
         android:scaleType="centerCrop"
         android:contentDescription="@string/backArrow"
-        android:src="@drawable/ic_baseline_arrow_back_24"
+        android:src="@drawable/ic_arrow_back"
         app:layout_constraintEnd_toStartOf="@+id/tvStopWatch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +29,7 @@
         android:layout_marginTop="40dp"
         android:scaleType="centerCrop"
         android:contentDescription="@string/timerImage"
-        android:src="@drawable/ic_baseline_timer_24"
+        android:src="@drawable/ic_timer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tvStopWatch"

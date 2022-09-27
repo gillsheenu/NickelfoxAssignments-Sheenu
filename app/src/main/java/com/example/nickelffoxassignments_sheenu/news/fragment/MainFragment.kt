@@ -75,10 +75,10 @@ class MainFragment : Fragment() {
 
     private fun statusBarColor() {
         when(viewPager.currentItem){
-            0->setColor(R.color.calculator_color)
-            1->setColor(R.color.stopWatch_color)
-            2->setColor(R.color.news_color)
-            3->setColor(R.color.musicPlayer_color)
+            0->setColor(R.color.light_blue)
+            1->setColor(R.color.sandy_yellow)
+            2->setColor(R.color.light_green)
+            3->setColor(R.color.bright_yellow)
             else->setColor(R.color.colorPrimary)
         }
     }
@@ -93,16 +93,16 @@ class MainFragment : Fragment() {
     private fun updateBgColor() {
         when(viewPager.currentItem){
             0-> viewPager.setBackgroundColor(ContextCompat.getColor(requireContext(),
-                R.color.calculator_color
+                R.color.light_blue
             ))
             1->viewPager.setBackgroundColor(ContextCompat.getColor(requireContext(),
-                R.color.stopWatch_color
+                R.color.sandy_yellow
             ))
             2->viewPager.setBackgroundColor(ContextCompat.getColor(requireContext(),
-                R.color.news_color
+                R.color.light_green
             ))
             3->viewPager.setBackgroundColor(ContextCompat.getColor(requireContext(),
-                R.color.musicPlayer_color
+                R.color.bright_yellow
             ))
 
         }

@@ -1,6 +1,5 @@
 package com.example.nickelffoxassignments_sheenu
 
-import android.os.Build
 import androidx.core.content.ContextCompat
 
 import androidx.appcompat.app.AppCompatActivity
@@ -82,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.calculatorFragment -> {
 
                     setColorEnabled = true
-                    setAppBarColor(R.color.calculator_color)
+                    setAppBarColor(R.color.light_blue)
                     supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 }
                 R.id.stopWatchFragment -> {
@@ -93,12 +92,12 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.newsFragment -> {
                     setColorEnabled = true
-                    setAppBarColor(R.color.news_color)
+                    setAppBarColor(R.color.light_green)
                     supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 }
                 R.id.musicPlayerFragment -> {
                     setColorEnabled = true
-                    setAppBarColor(R.color.musicPlayer_color)
+                    setAppBarColor(R.color.bright_yellow)
                     supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 }
                 R.id.historyFragment -> {
