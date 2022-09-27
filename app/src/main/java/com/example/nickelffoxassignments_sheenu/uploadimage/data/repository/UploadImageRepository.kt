@@ -44,7 +44,6 @@ class UploadImageRepository @Inject constructor(@ApplicationContext var context:
 
             val response= mUploadImage.uploadImage(filePart, titlePart)
             uploadImageLiveData.postValue(response.body())
-            Toast.makeText(context,"Failed to upload ",Toast.LENGTH_SHORT).show()
 
 
 

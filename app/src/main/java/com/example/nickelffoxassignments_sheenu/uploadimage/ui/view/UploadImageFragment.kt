@@ -72,9 +72,6 @@ class UploadImageFragment : Fragment(){
 
         val imageSelected=registerForActivityResult(ActivityResultContracts.OpenDocument()) {
 
-            Log.d("NETW", "onCreateView: ${it} ")
-
-
 
             if (it!=null) {
                 capturedImage.setImageURI(it)
@@ -82,18 +79,11 @@ class UploadImageFragment : Fragment(){
             }else{
                 Toast.makeText(activity,"No Image Selected",Toast.LENGTH_SHORT).show()
             }
-//            CoroutineScope(Dispatchers.IO).launch {
-//                imageViewModel.imageUpload(it!!)
-//            }
-//
         }
 
         selectButton.setOnClickListener {
             imageSelected.launch(arrayOf("image/*"))
         }
-
-
-
 
 
         uploadButton.setOnClickListener {
