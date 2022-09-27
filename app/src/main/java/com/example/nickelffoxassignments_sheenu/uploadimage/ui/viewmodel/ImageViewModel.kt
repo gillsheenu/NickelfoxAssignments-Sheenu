@@ -9,7 +9,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ImageViewModel @Inject constructor(private var repository: UploadImageRepository):ViewModel() {
 
-    var ImageLiveData=repository.UploadImageLiveData
+    var imageLiveData=repository.uploadImageLiveData
 
    suspend fun imageUpload(uri: Uri){
 

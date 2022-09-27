@@ -1,5 +1,6 @@
 package com.example.nickelffoxassignments_sheenu.uploadimage.data.network
 
+import com.example.nickelffoxassignments_sheenu.uploadimage.data.local.UploadImageResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response

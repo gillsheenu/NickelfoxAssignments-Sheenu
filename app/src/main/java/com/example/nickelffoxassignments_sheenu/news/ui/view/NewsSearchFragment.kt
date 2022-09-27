@@ -40,7 +40,7 @@ class NewsSearchFragment : Fragment(), RecyclerListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_news_search, container, false)
 
-        val connectionLiveData= ConnectionLiveData(requireActivity().applicationContext )
+        val connectionLiveData= ConnectionLiveData(requireActivity().application )
 
         emptyTextView=view.findViewById(R.id.empty_view)
         newsViewModel = ViewModelProvider(this@NewsSearchFragment)[NewsViewModel::class.java]

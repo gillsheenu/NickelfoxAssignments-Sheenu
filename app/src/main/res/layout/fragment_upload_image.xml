@@ -10,26 +10,36 @@
         android:id="@+id/ivCapturedImage"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:scaleType="centerCrop"
-        android:contentDescription="@string/selectedImage"/>
+        android:layout_marginTop="50dp"
+        android:adjustViewBounds="true"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/selectedImage"
+        android:scaleType="centerCrop" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:gravity="center_horizontal">
+
         <Button
             android:id="@+id/btnSelect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Select Image"/>
+            android:textColor="#FFFF"
+            android:text="Select Image"
+            android:backgroundTint="@color/news_color" />
+
         <Button
             android:id="@+id/btnUpload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="20dp"
-            android:text="@string/upload_image"/>
+            android:textColor="@color/white"
+            android:backgroundTint="@color/news_color"
+            android:text="@string/upload_image" />
 
     </LinearLayout>
 
@@ -37,45 +47,54 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="20dp">
+        android:layout_margin="20dp"
+        android:orientation="horizontal">
+
         <TextView
+            android:id="@+id/tvSuccessHeadline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:visibility="gone"
             android:text="@string/success"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:padding="10dp"/>
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/tvSuccess"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:padding="10dp"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:padding="10dp"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginStart="20dp">
+        android:layout_marginStart="20dp"
+        android:orientation="horizontal">
+
         <TextView
+            android:id="@+id/tvStatusHeadline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:visibility="gone"
             android:text="@string/status_code"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:padding="10dp"/>
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/tvStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:padding="10dp"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:padding="10dp"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 

@@ -41,7 +41,7 @@ class NewsHomeFragment : Fragment(), RecyclerListener {
 
         val view=inflater.inflate(R.layout.fragment_news_home, container, false)
 
-        val connectionLiveData= ConnectionLiveData(requireActivity().applicationContext )
+        val connectionLiveData= ConnectionLiveData(requireActivity().application )
 
         emptyTextView=view.findViewById(R.id.emptyView)
         newsHomeProgressBar=view.findViewById(R.id.pgNewHome)

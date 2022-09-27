@@ -1,4 +1,4 @@
-package com.example.nickelffoxassignments_sheenu.uploadimage.data.network
+package com.example.nickelffoxassignments_sheenu.uploadimage.data.local
 
 import com.example.nickelffoxassignments_sheenu.uploadimage.data.local.Data
 

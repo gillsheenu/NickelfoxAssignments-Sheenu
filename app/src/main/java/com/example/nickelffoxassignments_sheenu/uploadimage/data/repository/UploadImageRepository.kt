@@ -3,9 +3,10 @@ package com.example.nickelffoxassignments_sheenu.uploadimage.data.repository
 import android.content.Context
 import android.net.Uri
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.example.nickelffoxassignments_sheenu.uploadimage.data.network.UploadImage
-import com.example.nickelffoxassignments_sheenu.uploadimage.data.network.UploadImageResponse
+import com.example.nickelffoxassignments_sheenu.uploadimage.data.local.UploadImageResponse
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -19,16 +20,16 @@ import javax.inject.Inject
 
 class UploadImageRepository @Inject constructor(@ApplicationContext var context: Context, private var mUploadImage: UploadImage) {
 
-    val UploadImageLiveData=MutableLiveData<UploadImageResponse>()
+    val uploadImageLiveData=MutableLiveData<UploadImageResponse>()
 
     suspend fun uploadSelectedImage(uri: Uri) {
-
 
         try {
             val file=copyStreamToFile(uri)
 
             val filePart= MultipartBody.Part.createFormData("image", file?.name,file!!.asRequestBody())
             val titlePart= "this is a new image".toRequestBody("text/plain".toMediaTypeOrNull())
+
             withContext(Dispatchers.IO){
                 uploadAllImage(filePart,titlePart)
             }
@@ -38,15 +39,19 @@ class UploadImageRepository @Inject constructor(@ApplicationContext var context:
         }
     }
 
+
     private suspend fun uploadAllImage(filePart: MultipartBody.Part, titlePart: RequestBody) {
 
-        val response= mUploadImage.uploadImage(filePart, titlePart)
-        if(response.isSuccessful){
-            Log.d("RESP", "Success:${response.body()?.success} ")
-        }else{
-            Log.d("RESP", "Error:${response.errorBody()} ")
-        }
-        UploadImageLiveData.postValue(response.body())
+            val response= mUploadImage.uploadImage(filePart, titlePart)
+            uploadImageLiveData.postValue(response.body())
+            Toast.makeText(context,"Failed to upload ",Toast.LENGTH_SHORT).show()
+
+
+
+
+
+
+
 
     }
 
