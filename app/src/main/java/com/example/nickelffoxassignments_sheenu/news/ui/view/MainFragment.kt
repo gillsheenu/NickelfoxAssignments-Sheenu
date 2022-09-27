@@ -31,7 +31,7 @@ class MainFragment : Fragment() {
         images.add(R.drawable.calculator)
         images.add(R.drawable.stopwatch)
         images.add(R.drawable.mnews)
-        images.add(R.drawable.music)
+        images.add(R.drawable.select_image)
 
 //        var btnLogout = view.findViewById<Button>(R.id.btnLogout)
 //        firebaseAuth = FirebaseAuth.getInstance()

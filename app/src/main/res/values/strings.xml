@@ -60,4 +60,5 @@
     <string name="search">Search</string>
     <string name="bookmark">Bookmark</string>
     <string name="emptyView">emptyView</string>
+    <string name="select_image">Select Image</string>
 </resources>
