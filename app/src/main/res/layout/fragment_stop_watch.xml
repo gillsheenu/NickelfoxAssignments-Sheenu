@@ -1,148 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#202020"
-    tools:context=".StopWatchFragment">
-    <LinearLayout
-        android:id="@+id/lyHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+    tools:context=".stopwatch.ui.StopWatchFragment">
+
+
+    <ImageView
+        android:id="@+id/ivBackArrow"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="45dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/backArrow"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintEnd_toStartOf="@+id/tvStopWatch"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="40dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/timerImage"
+        android:src="@drawable/ic_baseline_timer_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tvStopWatch"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_baseline_arrow_back_24"
-            android:scaleType="centerCrop"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFF"
-            android:fontFamily="@font/sf_pro_regular"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:gravity="center"
-            android:text="StopWatch"
-            android:textSize="24dp"/>
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
+    <TextView
+        android:id="@+id/tvStopWatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/sf_pro_regular"
+        android:text="@string/stopwatch"
+        android:textColor="#FFFF"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/ivBackArrow"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_baseline_timer_24"
-            android:scaleType="centerCrop"/>
-    </LinearLayout>
     <TextView
         android:id="@+id/tvTimer"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginTop="60dp"
-        android:gravity="center"
-        android:textSize="30dp"
-        android:textColor="#FFFFFF"
-        android:text="00:00"
         android:background="@drawable/stop_watch_gradient"
-        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center"
+        android:text="@string/_00_00"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lyHeader"/>
-   <androidx.recyclerview.widget.RecyclerView
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintBottom_toTopOf="@id/lyFooter"
-       app:layout_constraintTop_toBottomOf="@id/tvTimer"
-       android:layout_marginTop="20dp"
-       android:layout_marginBottom="20dp"
-       android:layout_marginLeft="30dp"
-       android:layout_marginRight="30dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvStopWatch" />
 
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:id="@+id/lyFooter"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@id/cvPlayButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.266"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTimer"
+        app:layout_constraintVertical_bias="0.147" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:backgroundTint="#202020"
+        app:cardCornerRadius="50dp"
+        app:cardElevation="40dp"
+        app:cardMaxElevation="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="40dp">
+        app:layout_constraintEnd_toStartOf="@+id/cvPlayButton"
+        app:layout_constraintStart_toStartOf="parent">
 
 
-        <androidx.cardview.widget.CardView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="50dp"
+            android:background="@drawable/stop_watch_button_bg"
+            android:text="@string/reset"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="#202020"
+            tools:layout_editor_absoluteX="42dp"
+            tools:layout_editor_absoluteY="657dp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvPlayButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:backgroundTint="#202020"
+        app:cardCornerRadius="100dp"
+        app:cardElevation="30dp"
+        app:cardMaxElevation="35dp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cvLapButton"
+        app:layout_constraintStart_toEndOf="@+id/cardView">
+        <ImageButton
+
+            android:id="@+id/imageButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center_vertical"
-            app:cardElevation="40dp"
             android:backgroundTint="#202020"
-            app:cardMaxElevation="60dp">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
-                android:text="RESET"
-                android:background="@drawable/stop_watch_button_bg"
-                app:backgroundTint="#202020"/>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            app:cardCornerRadius="100dp"
-            app:cardElevation="30dp"
-            android:backgroundTint="#202020"
-            app:cardMaxElevation="35dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="10dp">
-
-            <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="5dp"
-                android:padding="15dp"
-                android:backgroundTint="#202020"
-                android:scaleType="centerCrop"
-                android:src="@drawable/play_button" />
-
-        </androidx.cardview.widget.CardView>
+            android:padding="15dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/play_button"
+            android:contentDescription="@string/playButton"
+            />
 
 
-        <androidx.cardview.widget.CardView
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvLapButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:backgroundTint="#202020"
+        app:cardCornerRadius="50dp"
+        app:cardElevation="40dp"
+        app:cardMaxElevation="60dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cvPlayButton">
+
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="50dp"
-            app:cardElevation="40dp"
-            android:layout_gravity="center_vertical"
-            android:backgroundTint="#202020"
-            app:cardMaxElevation="60dp"
-            >
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:background="@drawable/stop_watch_button_bg"
-                android:textColor="#FFFFFF"
-                android:text="LAP"
-                app:backgroundTint="#202020" />
-
-        </androidx.cardview.widget.CardView>
+            android:background="@drawable/stop_watch_button_bg"
+            android:text="@string/lap"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="#202020"
+            tools:layout_editor_absoluteX="257dp"
+            tools:layout_editor_absoluteY="658dp" />
 
 
+    </androidx.cardview.widget.CardView>
 
-
-    </LinearLayout>
 
 
 
