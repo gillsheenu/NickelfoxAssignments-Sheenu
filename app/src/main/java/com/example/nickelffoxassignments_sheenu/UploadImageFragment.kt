@@ -44,8 +44,8 @@ class UploadImageFragment : Fragment(){
 
         }
         imageViewModel.ImageLiveData.observe(viewLifecycleOwner) {
-            imageSuccessResponse.text = it.success.toString()
-            imageStatusCode.text = it.status.toString()
+            imageSuccessResponse.text = it?.success.toString()
+            imageStatusCode.text = it?.status.toString()
         }
 
         capturedImage=view.findViewById(R.id.ivCapturedImage)

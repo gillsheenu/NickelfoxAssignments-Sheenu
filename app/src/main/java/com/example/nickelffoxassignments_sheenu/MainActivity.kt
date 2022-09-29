@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
+import android.view.WindowInsets.*
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
@@ -80,22 +81,23 @@ class MainActivity : AppCompatActivity() {
                 R.id.calculatorFragment -> {
 
                     setColorEnabled = true
-                    setAppBarColor(R.color.calculator_color)
+                    setAppBarColor(R.color.light_blue)
                     supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 }
                 R.id.stopWatchFragment -> {
                     setColorEnabled = true
-                    setAppBarColor(R.color.stopWatch_color)
+                    setAppBarColor(R.color.new_stop_watch_color)
                     supportActionBar?.setDisplayHomeAsUpEnabled(false)
+                    supportActionBar?.title=""
                 }
                 R.id.newsFragment -> {
                     setColorEnabled = true
-                    setAppBarColor(R.color.news_color)
+                    setAppBarColor(R.color.light_green)
                     supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 }
                 R.id.musicPlayerFragment -> {
                     setColorEnabled = true
-                    setAppBarColor(R.color.musicPlayer_color)
+                    setAppBarColor(R.color.bright_yellow)
                     supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 }
                 R.id.historyFragment -> {

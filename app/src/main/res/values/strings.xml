@@ -51,4 +51,11 @@
     <string name="upload_image">Upload Image</string>
     <string name="success">Success :</string>
     <string name="status_code">Status Code :</string>
+    <string name="backArrow">backArrow</string>
+    <string name="timerImage">timerImage</string>
+    <string name="stopwatch">StopWatch</string>
+    <string name="reset">RESET</string>
+    <string name="playButton">playButton</string>
+    <string name="lap">LAP</string>
+    <string name="_00_00">00:00</string>
 </resources>

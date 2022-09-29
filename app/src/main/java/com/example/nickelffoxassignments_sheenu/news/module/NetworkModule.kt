@@ -13,31 +13,32 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
 class NetworkModule {
 
-//    @Named("news")
-//    @Singleton
-//    @Provides
-//    fun providesRetrofit():Retrofit{
-//        return Retrofit.Builder()
-//            .baseUrl(Constants.BASE_URl)
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//    }
+    @Named("news")
+    @Singleton
+    @Provides
+    fun providesRetrofit():Retrofit{
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
 
     @Singleton
     @Provides
-    fun providesNewsService( retrofit: Retrofit): NewsService {
+    fun providesNewsService( @Named("news") retrofit: Retrofit): NewsService {
         return retrofit.create(NewsService::class.java)
     }
 
 
 
-//    @Named("image")
+    @Named("image")
     @Singleton
     @Provides
     fun providesImageRetrofit(okHttpClient: OkHttpClient):Retrofit{
@@ -65,7 +66,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun providesUploadImage(retrofit: Retrofit): UploadImage {
+    fun providesUploadImage(@Named("image")retrofit: Retrofit): UploadImage {
         return retrofit.create(UploadImage::class.java)
     }
 
