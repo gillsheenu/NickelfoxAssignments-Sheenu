@@ -127,7 +127,7 @@
             android:id="@+id/ibPlayButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center"
             android:backgroundTint="#202020"
             android:padding="15dp"
             android:scaleType="centerCrop"
