@@ -1,4 +1,4 @@
-package com.example.nickelffoxassignments_sheenu.stopwatch.data
+package com.example.nickelffoxassignments_sheenu.stopwatch.data.local
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -7,12 +7,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.*
 import androidx.work.*
 import com.example.nickelffoxassignments_sheenu.R.*
-import com.example.nickelffoxassignments_sheenu.stopwatch.ui.StopWatchFragment
-import com.google.common.util.concurrent.ListenableFuture
+import com.example.nickelffoxassignments_sheenu.stopwatch.ui.view.StopWatchFragment
 import kotlinx.coroutines.delay
+import java.util.*
 
 class StopWatchWorker(context:Context, params: WorkerParameters) :CoroutineWorker(context, params) {
 
@@ -20,14 +20,24 @@ class StopWatchWorker(context:Context, params: WorkerParameters) :CoroutineWorke
         var workerLiveData= MutableLiveData<Int>()
     }
 
-    var seconds=0
+    private var seconds=0
+    private var hours:Int=0
+    private var min:Int = 0
+    private var sec:Int=0
+    var time:String=String.format(Locale.getDefault(), "%d:%02d:%02d",hours,min,sec)
+
 
     private val notificationManager=context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     override suspend fun doWork(): Result {
 
-        return try{
+        try{
             while(!isStopped){
+                hours=seconds/3600
+                min=(seconds % 3600) /60
+                sec=seconds%60
+                time=String.format(Locale.getDefault(), "%d:%02d:%02d",hours,min,sec)
+                setForeground(getForegroundInfo())
                 workerLiveData.postValue(seconds)
                 delay(1000)
                 seconds++
@@ -47,8 +57,8 @@ class StopWatchWorker(context:Context, params: WorkerParameters) :CoroutineWorke
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannel()
         }
-        val pendingIntent= Intent(applicationContext,StopWatchFragment::class.java).let {
-            PendingIntent.getActivity(applicationContext, 0, it,0)
+        val pendingIntent= Intent(applicationContext, StopWatchFragment::class.java).let {
+            PendingIntent.getActivity(applicationContext, 0, it,PendingIntent.FLAG_IMMUTABLE)
         }
 
         val notification=NotificationCompat.Builder(applicationContext,"MyStopWatch")
@@ -56,7 +66,10 @@ class StopWatchWorker(context:Context, params: WorkerParameters) :CoroutineWorke
             .setSmallIcon(drawable.stopwatch)
             .addAction(drawable.ic_cancel,"cancel",intent)
             .setContentIntent(pendingIntent)
-            .setContentText("this is a stop watch")
+            .setOnlyAlertOnce(true)
+            //.setWhen(System.currentTimeMillis())
+           // .setUsesChronometer(true)
+            .setContentText(time)
             .setOngoing(true)
             .build()
 

@@ -58,4 +58,6 @@
     <string name="playButton">playButton</string>
     <string name="lap">LAP</string>
     <string name="_00_00">00:00</string>
+    <string name="idNo">idNo</string>
+    <string name="timer_expression">timer expression</string>
 </resources>
