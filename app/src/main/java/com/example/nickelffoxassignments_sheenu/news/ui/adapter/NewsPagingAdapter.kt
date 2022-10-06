@@ -18,13 +18,14 @@ import com.bumptech.glide.request.target.Target
 import com.example.nickelffoxassignments_sheenu.R
 import com.example.nickelffoxassignments_sheenu.news.utils.RecyclerListener
 import com.example.nickelffoxassignments_sheenu.news.data.local.Article
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 
 class NewsPagingAdapter:PagingDataAdapter<Article, NewsPagingAdapter.NewsViewHolder>(COMPARATOR){
 
       var recyclerListener: RecyclerListener? =null
     var bookmark:Boolean=false
      var title:String="Bookmark"
+    var result:String=""
 
 
     inner class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -99,24 +100,32 @@ class NewsPagingAdapter:PagingDataAdapter<Article, NewsPagingAdapter.NewsViewHol
         holder.newsTitle.setOnClickListener {
            recyclerListener?.toDetailsPage(item!!.url)
         }
+
+
+
+
         holder.newsMenu.setOnCreateContextMenuListener(object : View.OnCreateContextMenuListener {
             override fun onCreateContextMenu(p0: ContextMenu?, p1: View?, p2: ContextMenu.ContextMenuInfo?) {
-                p0?.add("Bookmark")?.setOnMenuItemClickListener {
+                if(!urlList.contains(item!!.url)) {
+                    p0?.add("Bookmark")?.setOnMenuItemClickListener {
+                        recyclerListener?.onContextMenuClick(item.title, item.author, item.source.name, item.urlToImage, item.url)
+                        return@setOnMenuItemClickListener true
+                    }
+                }else{
+                    p0?.add("UnMark")?.setOnMenuItemClickListener {
 
+                      recyclerListener?.onContextMenuClickDelete(item.title, item.author, item.source.name, item.urlToImage, item.url)
+                       return@setOnMenuItemClickListener true
+                    }
+                }
+                p0?.add("Share")?.setOnMenuItemClickListener {
+                    recyclerListener?.onShare(item.url)
                     return@setOnMenuItemClickListener true
                 }
-                p0?.add("Share")
 
             }
         })
 }
-
-
-
-
-
-
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
@@ -124,9 +133,5 @@ class NewsPagingAdapter:PagingDataAdapter<Article, NewsPagingAdapter.NewsViewHol
         return NewsViewHolder(view)
     }
 
-//    override fun onCreateContextMenu(p0: ContextMenu?, p1: View?, p2: ContextMenu.ContextMenuInfo?) {
-//        p0?.add(0, p1!!.id,0,"Share")
-//        p0?.add(0, p1!!.id,1,"Bookmark")
 
-//    }
 }

@@ -13,6 +13,7 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nickelffoxassignments_sheenu.R
+import com.example.nickelffoxassignments_sheenu.news.data.local.Article
 import com.example.nickelffoxassignments_sheenu.news.ui.adapter.NewsLoaderAdapter
 import com.example.nickelffoxassignments_sheenu.news.ui.adapter.NewsPagingAdapter
 import com.example.nickelffoxassignments_sheenu.news.ui.viewmodel.NewsViewModel
@@ -98,6 +99,10 @@ class NewsHomeFragment : Fragment(), RecyclerListener {
                 }
 
             }
+        }
+        newsViewModel.repository.newsDatabase.getBookmarkDAO().getArticlesUrl().observe(viewLifecycleOwner
+        ) {
+            newsAdapter.setUrlList(it)
         }
 
 //        newsAdapter=NewsAdapter()

@@ -7,10 +7,7 @@ interface RecyclerListener {
   fun onContextMenuClickDelete(title:String, author: String?, source:String, image:String,url:String)
   fun onShare(url:String)
 
-//
-//  fun setArticleStatus(url: String,status:String)
-//
-//  fun getArticleStatus(url: String):String
+
 
 
 

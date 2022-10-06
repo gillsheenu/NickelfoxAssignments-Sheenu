@@ -53,6 +53,11 @@ class NewsSearchFragment : Fragment(), RecyclerListener {
         newsRecycler = view.findViewById(R.id.rvNewsRoot)
         newsRecycler.layoutManager = LinearLayoutManager(activity)
 
+        newsViewModel.repository.newsDatabase.getBookmarkDAO().getArticlesUrl().observe(viewLifecycleOwner
+        ) {
+            newsAdapter.setUrlList(it)
+        }
+
 
 
         connectionLiveData.observe(viewLifecycleOwner) { availableInfo ->
@@ -145,17 +150,7 @@ class NewsSearchFragment : Fragment(), RecyclerListener {
             startActivity(Intent.createChooser(intent, "Share Link"))
         }
 
-    override fun isUrlMatched(url: String): Boolean {
-        TODO("Not yet implemented")
-    }
 
-    override fun setArticleStatus(url: String, status: String) {
-        TODO("Not yet implemented")
-    }
-
-    override fun getArticleStatus(url: String): String {
-        return url
-    }
 
 
 //
