@@ -21,9 +21,7 @@ import com.example.nickelffoxassignments_sheenu.news.data.local.Bookmark
 import com.example.nickelffoxassignments_sheenu.news.utils.ConnectionLiveData
 import com.google.android.material.chip.ChipGroup
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.util.*
 
 @ExperimentalPagingApi
@@ -36,6 +34,8 @@ class NewsHomeFragment : Fragment(), RecyclerListener {
     private lateinit var newsViewModel: NewsViewModel
     private lateinit var newsHomeProgressBar:ProgressBar
     private lateinit var emptyTextView: ImageView
+    var title:String=""
+    var ismatched:String=""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -127,9 +127,9 @@ class NewsHomeFragment : Fragment(), RecyclerListener {
 
         }
 
-
         newsRecycler.layoutManager= LinearLayoutManager(activity)
         registerForContextMenu(newsRecycler)
+
 
 
         return view
@@ -148,12 +148,20 @@ class NewsHomeFragment : Fragment(), RecyclerListener {
 
     }
 
+    override fun onContextMenuClickDelete(title: String, author: String?, source: String, image: String, url: String) {
+        CoroutineScope(Dispatchers.IO).launch{
+            newsViewModel.repository.newsDatabase.getBookmarkDAO().deleteArticles(Bookmark(title,author,source,image,url))
+        }
+
+    }
+
     override fun onShare(url: String) {
         val intent= Intent(Intent.ACTION_SEND)
         intent.type = "text/Plain"
         intent.putExtra(Intent.EXTRA_TEXT,url)
         startActivity(Intent.createChooser(intent,"Share Link"))
     }
+
 
 
 

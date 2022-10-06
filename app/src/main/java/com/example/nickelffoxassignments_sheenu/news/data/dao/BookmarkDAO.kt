@@ -15,4 +15,10 @@ interface BookmarkDAO {
 
     @Query("SELECT * FROM Bookmark")
     fun getArticles():LiveData<List<Bookmark>>
+
+    @Query("SELECT url FROM Bookmark WHERE url=:url")
+     fun getUrl(url:String):String
+
+    @Query("SELECT url FROM Bookmark")
+    fun getArticlesUrl():LiveData<List<String>>
 }

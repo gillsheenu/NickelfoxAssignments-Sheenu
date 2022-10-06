@@ -11,6 +11,7 @@ import retrofit2.http.*
 interface UploadImage {
 
     @Multipart
+    @Headers("Authorization: Client-ID 546c25a59c58ad7")
     @POST("3/upload")
    suspend fun uploadImage(
         @Part image:MultipartBody.Part?,

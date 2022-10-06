@@ -1,10 +1,8 @@
 package com.example.nickelffoxassignments_sheenu.news.data.dao
 
+import androidx.lifecycle.LiveData
 import androidx.paging.PagingSource
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.nickelffoxassignments_sheenu.news.data.local.Article
 
 @Dao
@@ -18,5 +16,12 @@ interface ArticleDao {
 
      @Query("DELETE FROM Articles")
      suspend fun deleteArticles()
+
+
+     @Query("SELECT checkableTitle FROM Articles WHERE url=:url")
+     suspend fun getArticleCheckableStatus(url:String):String
+
+     @Query("UPDATE Articles SET checkableTitle=:status WHERE url=:url" )
+     fun updateArticleCheckableStaus(url:String,status:String)
 
 }

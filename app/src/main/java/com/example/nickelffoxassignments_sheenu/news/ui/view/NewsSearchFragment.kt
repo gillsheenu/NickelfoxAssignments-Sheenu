@@ -36,6 +36,7 @@ class NewsSearchFragment : Fragment(), RecyclerListener {
     lateinit var searchView: SearchView
     lateinit var newsViewModel: NewsViewModel
     lateinit var searchImage:ImageView
+     var title: String=""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_news_search, container, false)
@@ -131,12 +132,31 @@ class NewsSearchFragment : Fragment(), RecyclerListener {
 
         }
 
-        override fun onShare(url: String) {
+    override fun onContextMenuClickDelete(title: String, author: String?, source: String, image: String, url: String) {
+        CoroutineScope(Dispatchers.IO).launch{
+            newsViewModel.repository.newsDatabase.getBookmarkDAO().deleteArticles(Bookmark(title,author,source,image,url))
+        }
+    }
+
+    override fun onShare(url: String) {
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "text/Plain"
             intent.putExtra(Intent.EXTRA_TEXT, url)
             startActivity(Intent.createChooser(intent, "Share Link"))
         }
+
+    override fun isUrlMatched(url: String): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun setArticleStatus(url: String, status: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getArticleStatus(url: String): String {
+        return url
+    }
+
 
 //
 //        fun isConnected(): Boolean {

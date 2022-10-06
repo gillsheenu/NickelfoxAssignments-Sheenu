@@ -9,6 +9,8 @@ data class Article(
     val author:String?=null,
     val title:String,
 
+    var checkbale:Boolean=false,
+    var checkableTitle:String="Bookmark",
     @PrimaryKey(autoGenerate = false)
     val url:String,
 

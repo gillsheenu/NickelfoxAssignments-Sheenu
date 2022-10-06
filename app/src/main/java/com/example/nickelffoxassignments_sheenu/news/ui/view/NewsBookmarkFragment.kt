@@ -65,12 +65,34 @@ class NewsBookmarkFragment : Fragment(), RecyclerListener {
 
     }
 
+    override fun onContextMenuClickDelete(
+        title: String,
+        author: String?,
+        source: String,
+        image: String,
+        url: String
+    ) {
+
+    }
+
     override fun onShare(url: String) {
         val intent= Intent(Intent.ACTION_SEND)
         intent.type = "text/Plain"
         intent.putExtra(Intent.EXTRA_TEXT,url)
         startActivity(Intent.createChooser(intent,"Share Link"))
     }
+
+//    override fun isUrlMatched(url: String): Boolean {
+//        TODO("Not yet implemented")
+//    }
+//
+//    override fun setArticleStatus(url: String, status: String) {
+//        TODO("Not yet implemented")
+//    }
+//
+//    override fun getArticleStatus(url: String): String {
+//        return url
+//    }
 
 
 }
