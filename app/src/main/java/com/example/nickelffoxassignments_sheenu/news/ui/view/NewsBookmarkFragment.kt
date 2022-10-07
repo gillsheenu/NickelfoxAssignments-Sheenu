@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.view.isEmpty
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.paging.ExperimentalPagingApi
@@ -27,11 +29,14 @@ class NewsBookmarkFragment : Fragment(), RecyclerListener {
     private lateinit var bookmarkRecycler:RecyclerView
     private lateinit var newsViewModel: NewsViewModel
     private lateinit var newsAdapter: NewsAdapter
+    lateinit var noBookmark:ImageView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view=inflater.inflate(R.layout.fragment_news_bookmark, container, false)
         bookmarkRecycler=view.findViewById(R.id.rvBookmark)
+        noBookmark=view.findViewById(R.id.ivBookmark)
+
 
         newsViewModel= ViewModelProvider(this@NewsBookmarkFragment)[NewsViewModel::class.java]
          newsAdapter= NewsAdapter()
@@ -42,8 +47,15 @@ class NewsBookmarkFragment : Fragment(), RecyclerListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         newsViewModel.repository.newsDatabase.getBookmarkDAO().getArticles().observe(viewLifecycleOwner
         ) {
+            if(it.isEmpty()){
+                noBookmark.visibility=View.VISIBLE
+            }
+            else{
+                noBookmark.visibility=View.GONE
+            }
             newsAdapter.submitList(it)
         }
         newsAdapter.setListeners(this)
