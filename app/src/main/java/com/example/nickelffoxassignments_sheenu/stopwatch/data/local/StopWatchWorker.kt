@@ -19,9 +19,10 @@ class StopWatchWorker(context:Context, params: WorkerParameters) :CoroutineWorke
 
     companion object{
         var workerLiveData= MutableLiveData<Int>()
+        var updateLiveDagta=MutableLiveData<Int>()
     }
 
-    private var seconds=0
+     var seconds=0
     private var hours:Int=0
     private var min:Int = 0
     private var sec:Int=0
@@ -40,19 +41,22 @@ class StopWatchWorker(context:Context, params: WorkerParameters) :CoroutineWorke
                 time=String.format(Locale.getDefault(), "%d:%02d:%02d",hours,min,sec)
                 setForeground(getForegroundInfo())
                 workerLiveData.postValue(seconds)
+                updateLiveDagta.postValue(seconds)
+
                 delay(1000)
                 seconds++
             }
             return Result.success()
 
-        }
-        catch(e:CancellationException){
-            workerLiveData.postValue(0)
-            return  Result.failure()
+        }catch (e:CancellationException){
 
-        }finally {
             workerLiveData.postValue(0)
+            return Result.failure(workDataOf("SECONDS" to seconds))
         }
+
+
+
+
 
     }
 
