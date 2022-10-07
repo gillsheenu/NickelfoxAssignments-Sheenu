@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#202020"
-    tools:context=".stopwatch.ui.StopWatchFragment">
+    tools:context=".stopwatch.ui.view.StopWatchFragment">
 
 
     <ImageView
@@ -65,15 +65,15 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/rvLapItem"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@id/cvPlayButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.266"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTimer"
         app:layout_constraintVertical_bias="0.147" />
@@ -96,6 +96,7 @@
 
 
         <Button
+            android:id="@+id/btnReset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/stop_watch_button_bg"
@@ -123,10 +124,10 @@
         app:layout_constraintStart_toEndOf="@+id/cardView">
         <ImageButton
 
-            android:id="@+id/imageButton"
+            android:id="@+id/ibPlayButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center"
             android:backgroundTint="#202020"
             android:padding="15dp"
             android:scaleType="centerCrop"
@@ -154,6 +155,7 @@
         app:layout_constraintStart_toEndOf="@+id/cvPlayButton">
 
         <Button
+            android:id="@+id/btnLap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/stop_watch_button_bg"

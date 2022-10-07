@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.nickelffoxassignments_sheenu"
-        minSdk 21
+        minSdk 23
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -31,6 +31,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    buildFeatures {
+        viewBinding true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -101,6 +105,10 @@ dependencies {
     def paging_version = "3.1.1"
 
     implementation("androidx.paging:paging-runtime:$paging_version")
+
+    def work_version = "2.7.1"
+
+    implementation("androidx.work:work-runtime-ktx:$work_version")
 
 
     testImplementation 'junit:junit:4.13.2'

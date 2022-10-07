@@ -59,7 +59,7 @@
     </fragment>
     <fragment
         android:id="@+id/stopWatchFragment"
-        android:name="com.example.nickelffoxassignments_sheenu.stopwatch.ui.StopWatchFragment"
+        android:name="com.example.nickelffoxassignments_sheenu.stopwatch.ui.view.StopWatchFragment"
         android:label="StopWatch"
         tools:layout="@layout/fragment_stop_watch" />
     <fragment
