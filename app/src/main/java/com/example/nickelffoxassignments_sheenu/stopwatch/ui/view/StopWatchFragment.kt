@@ -101,7 +101,10 @@ class StopWatchFragment :Fragment() {
             isCancelled=true
             isPlayButton=true
             binding.ibPlayButton.setImageResource(R.drawable.play_button)
+            StopWatchWorker.workerLiveData.postValue(0)
+            inputValue=0
             WorkManager.getInstance(requireContext()).cancelUniqueWork("FirstWork")
+
 
 
 
