@@ -2,6 +2,7 @@ package com.example.nickelffoxassignments_sheenu.stopwatch.ui.view
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +28,13 @@ class StopWatchFragment :Fragment() {
     private var idNo=0
     private lateinit var lapTimer:String
     var isPlayButton:Boolean=true
-     var updatedTime:Int=0
+
+    var updateTime=0
+
+     companion object{
+         var inputValue=0
+         var isCancelled=true
+     }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -40,28 +47,50 @@ class StopWatchFragment :Fragment() {
 
 
 
-       val stopWatchWorkRequest= OneTimeWorkRequestBuilder<StopWatchWorker>()
-            .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
-            .build()
-
 
 //        WorkManager.getInstance(requireContext()).getWorkInfoByIdLiveData(stopWatchWorkRequest.id).observe(viewLifecycleOwner,
 //            androidx.lifecycle.Observer {
-//                if(it !=null){
+//                if(it !=null && it.state==WorkInfo.State.FAILED){
 //                    updatedTime=it.outputData.getInt("SECONDS",10)
+//                    Log.d("TAG", "onCreateView:$updatedTime ")
 //                }
 //            })
-        WorkManager.getInstance(requireContext())
+
+        StopWatchWorker.updateLiveDagta.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if(isCancelled==false){
+                inputValue=it
+                StopWatchWorker.workerLiveData.postValue(it)
+            }else{
+                inputValue=0
+                StopWatchWorker.workerLiveData.postValue(0)
+                binding.ibPlayButton.setImageResource(R.drawable.play_button)
+                isPlayButton=true
+
+            }
+
+        })
+
+
+
+
         binding.ibPlayButton.setOnClickListener {
             if(isPlayButton==true){
+                isCancelled=true
+
+                val stopWatchWorkRequest= OneTimeWorkRequestBuilder<StopWatchWorker>()
+                    .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+                    .setInputData(workDataOf("INPUT" to inputValue))
+                    .build()
                 binding.ibPlayButton.setImageResource(R.drawable.pause)
                 WorkManager.getInstance(requireContext())
-                    .enqueueUniqueWork("FirstWork", ExistingWorkPolicy.KEEP, stopWatchWorkRequest)
+                    .enqueueUniqueWork("FirstWork", ExistingWorkPolicy.REPLACE, stopWatchWorkRequest)
                 isPlayButton=false
             }else{
                 binding.ibPlayButton.setImageResource(R.drawable.play_button)
-                 WorkManager.getInstance(requireContext()).cancelUniqueWork("FirstWork")
-                StopWatchWorker.workerLiveData.postValue(updatedTime)
+
+                isCancelled=false
+                WorkManager.getInstance(requireContext()).cancelUniqueWork("FirstWork")
+
 
 
                 isPlayButton=true
@@ -69,9 +98,12 @@ class StopWatchFragment :Fragment() {
         }
 
         binding.btnReset.setOnClickListener {
-            WorkManager.getInstance(requireContext()).cancelUniqueWork("FirstWork")
-           isPlayButton=true
+            isCancelled=true
+            isPlayButton=true
             binding.ibPlayButton.setImageResource(R.drawable.play_button)
+            WorkManager.getInstance(requireContext()).cancelUniqueWork("FirstWork")
+
+
 
         }
         stopWatchAdapter= StopWatchAdapter()
@@ -85,9 +117,6 @@ class StopWatchFragment :Fragment() {
             binding.rvLapItem.adapter=stopWatchAdapter
 
         }
-
-
-
 
         binding.rvLapItem.layoutManager=LinearLayoutManager(this.activity)
 

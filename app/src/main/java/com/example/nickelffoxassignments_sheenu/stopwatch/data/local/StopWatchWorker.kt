@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.*
 import androidx.work.*
@@ -26,36 +27,39 @@ class StopWatchWorker(context:Context, params: WorkerParameters) :CoroutineWorke
     private var hours:Int=0
     private var min:Int = 0
     private var sec:Int=0
+
     var time:String=String.format(Locale.getDefault(), "%d:%02d:%02d",hours,min,sec)
 
 
     private val notificationManager=context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     override suspend fun doWork(): Result {
+        try {
+            seconds = inputData.getInt("INPUT", 30)
 
-        try{
-            while(!isStopped){
-                hours=seconds/3600
-                min=(seconds % 3600) /60
-                sec=seconds%60
-                time=String.format(Locale.getDefault(), "%d:%02d:%02d",hours,min,sec)
+            while (!isStopped) {
+                hours = seconds / 3600
+                min = (seconds % 3600) / 60
+                sec = seconds % 60
+                time = String.format(Locale.getDefault(), "%d:%02d:%02d", hours, min, sec)
                 setForeground(getForegroundInfo())
                 workerLiveData.postValue(seconds)
-                updateLiveDagta.postValue(seconds)
+
 
                 delay(1000)
                 seconds++
             }
             return Result.success()
-
         }catch (e:CancellationException){
-
             workerLiveData.postValue(0)
-            return Result.failure(workDataOf("SECONDS" to seconds))
+            updateLiveDagta.postValue(seconds)
+
+            return Result.failure()
         }
-
-
-
+//        }finally {
+//            workerLiveData.postValue(0)
+//            updateLiveDagta.postValue(seconds)
+//        }
 
 
     }
@@ -82,6 +86,8 @@ class StopWatchWorker(context:Context, params: WorkerParameters) :CoroutineWorke
             .setContentText(time)
             .setOngoing(true)
             .build()
+
+
 
         return ForegroundInfo(10001,notification)
     }
