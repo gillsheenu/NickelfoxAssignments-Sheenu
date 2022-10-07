@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkManager
+import com.example.nickelffoxassignments_sheenu.R
 import com.example.nickelffoxassignments_sheenu.databinding.FragmentStopWatchBinding
 import com.example.nickelffoxassignments_sheenu.stopwatch.ui.adapter.StopWatchAdapter
 import com.example.nickelffoxassignments_sheenu.stopwatch.data.local.StopWatchLapItems
@@ -27,6 +29,7 @@ class StopWatchFragment :Fragment() {
     private lateinit var lapTimeItems:ArrayList<StopWatchLapItems>
     private var idNo=0
     private lateinit var lapTimer:String
+    var isPlayButton:Boolean=true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
@@ -45,8 +48,20 @@ class StopWatchFragment :Fragment() {
         binding.ibPlayButton.setOnClickListener {
             WorkManager.getInstance(requireContext())
                 .enqueueUniqueWork("FirstWork", ExistingWorkPolicy.REPLACE, stopWatchWorkRequest)
+
         }
-        
+        binding.ibPlayButton.setOnClickListener {
+            if(isPlayButton==true){
+                binding.ibPlayButton.setImageResource(R.drawable.pause)
+                binding.ibPlayButton.scaleType=ImageView.ScaleType.FIT_XY
+                isPlayButton=false
+            }else{
+                binding.ibPlayButton.setImageResource(R.drawable.play_button)
+
+                isPlayButton=true
+            }
+        }
+
         binding.btnReset.setOnClickListener {
             WorkManager.getInstance(requireContext()).cancelUniqueWork("FirstWork")
 

@@ -11,6 +11,7 @@ import androidx.lifecycle.*
 import androidx.work.*
 import com.example.nickelffoxassignments_sheenu.R.*
 import com.example.nickelffoxassignments_sheenu.stopwatch.ui.view.StopWatchFragment
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay
 import java.util.*
 
@@ -43,6 +44,11 @@ class StopWatchWorker(context:Context, params: WorkerParameters) :CoroutineWorke
                 seconds++
             }
             return Result.success()
+
+        }
+        catch(e:CancellationException){
+            workerLiveData.postValue(0)
+            return  Result.failure()
 
         }finally {
             workerLiveData.postValue(0)
