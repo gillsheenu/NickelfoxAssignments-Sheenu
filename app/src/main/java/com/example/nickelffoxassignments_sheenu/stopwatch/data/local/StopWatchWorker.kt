@@ -21,6 +21,9 @@ class StopWatchWorker(context:Context, params: WorkerParameters) :CoroutineWorke
     companion object{
         var workerLiveData= MutableLiveData<Int>()
         var updateLiveDagta=MutableLiveData<Int>()
+        var playButtonLiveData=MutableLiveData<Boolean>()
+
+
     }
 
      var seconds=0
@@ -38,14 +41,14 @@ class StopWatchWorker(context:Context, params: WorkerParameters) :CoroutineWorke
             seconds = inputData.getInt("INPUT", 30)
 
             while (!isStopped) {
+                StopWatchFragment.isPlayButton=true
                 hours = seconds / 3600
                 min = (seconds % 3600) / 60
                 sec = seconds % 60
                 time = String.format(Locale.getDefault(), "%d:%02d:%02d", hours, min, sec)
                 setForeground(getForegroundInfo())
                 workerLiveData.postValue(seconds)
-
-
+                playButtonLiveData.postValue(true)
                 delay(1000)
                 seconds++
             }
@@ -53,6 +56,7 @@ class StopWatchWorker(context:Context, params: WorkerParameters) :CoroutineWorke
         }catch (e:CancellationException){
             workerLiveData.postValue(0)
             updateLiveDagta.postValue(seconds)
+            playButtonLiveData.postValue(false)
 
             return Result.failure()
         }

@@ -2,130 +2,158 @@ package com.example.nickelffoxassignments_sheenu.stopwatch.ui.view
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import androidx.core.view.isEmpty
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.*
 import com.example.nickelffoxassignments_sheenu.R
 import com.example.nickelffoxassignments_sheenu.databinding.FragmentStopWatchBinding
 import com.example.nickelffoxassignments_sheenu.stopwatch.ui.adapter.StopWatchAdapter
-import com.example.nickelffoxassignments_sheenu.stopwatch.data.local.StopWatchLapItems
 import com.example.nickelffoxassignments_sheenu.stopwatch.data.local.StopWatchWorker
+import com.example.nickelffoxassignments_sheenu.stopwatch.ui.viewmodel.StopWatchViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
-import kotlin.collections.ArrayList
 
 
+@AndroidEntryPoint
 class StopWatchFragment :Fragment() {
 
     private  var _binding: FragmentStopWatchBinding? =null
     private val binding get() = _binding!!
     private lateinit var stopWatchAdapter: StopWatchAdapter
-    private lateinit var lapTimeItems:ArrayList<StopWatchLapItems>
-    private var idNo=0
+//    private lateinit var lapTimeItems:ArrayList<StopWatchLapItems>
     private lateinit var lapTimer:String
-    var isPlayButton:Boolean=true
+    private lateinit var stopWatchViewModel:StopWatchViewModel
+    var isReset:Boolean=false
 
-    var updateTime=0
 
-     companion object{
+    companion object{
          var inputValue=0
          var isCancelled=true
-     }
+         var isPlayButton:Boolean=true
 
+     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         _binding= FragmentStopWatchBinding.inflate(inflater,container,false)
         val view=binding.root
 
-        lapTimeItems=ArrayList()
 
 
 
+        stopWatchViewModel= ViewModelProvider(this@StopWatchFragment)[StopWatchViewModel::class.java]
+
+//        lapTimeItems=ArrayList()
+
+        StopWatchWorker.playButtonLiveData.observe(viewLifecycleOwner) {
+            isPlayButton = if (it == true) {
+                binding.ibPlayButton.setImageResource(R.drawable.pause)
+                false
+
+            } else {
+                binding.ibPlayButton.setImageResource(R.drawable.play_button)
+                true
+
+            }
+        }
+        stopWatchAdapter= StopWatchAdapter()
+        stopWatchViewModel.repository.newsDatabase.getLapItemsDao().getLapItems().observe(viewLifecycleOwner
+        ) {
+            stopWatchAdapter.submitList(it)
+        }
 
 
-//        WorkManager.getInstance(requireContext()).getWorkInfoByIdLiveData(stopWatchWorkRequest.id).observe(viewLifecycleOwner,
-//            androidx.lifecycle.Observer {
-//                if(it !=null && it.state==WorkInfo.State.FAILED){
-//                    updatedTime=it.outputData.getInt("SECONDS",10)
-//                    Log.d("TAG", "onCreateView:$updatedTime ")
-//                }
-//            })
-
-        StopWatchWorker.updateLiveDagta.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            if(isCancelled==false){
-                inputValue=it
+        StopWatchWorker.updateLiveDagta.observe(viewLifecycleOwner) {
+            if (!isCancelled) {
+                inputValue = it
                 StopWatchWorker.workerLiveData.postValue(it)
-            }else{
-                inputValue=0
+//                isPlayButton=false
+            } else {
+                inputValue = 0
                 StopWatchWorker.workerLiveData.postValue(0)
                 binding.ibPlayButton.setImageResource(R.drawable.play_button)
-                isPlayButton=true
+
+
+//                isPlayButton=true
 
             }
 
-        })
-
-
+        }
 
 
         binding.ibPlayButton.setOnClickListener {
-            if(isPlayButton==true){
+            if(isPlayButton){
                 isCancelled=true
 
                 val stopWatchWorkRequest= OneTimeWorkRequestBuilder<StopWatchWorker>()
                     .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
                     .setInputData(workDataOf("INPUT" to inputValue))
                     .build()
-                binding.ibPlayButton.setImageResource(R.drawable.pause)
+//                binding.ibPlayButton.setImageResource(R.drawable.pause)
                 WorkManager.getInstance(requireContext())
                     .enqueueUniqueWork("FirstWork", ExistingWorkPolicy.REPLACE, stopWatchWorkRequest)
-                isPlayButton=false
+//                isPlayButton=false
             }else{
-                binding.ibPlayButton.setImageResource(R.drawable.play_button)
-
+//                binding.ibPlayButton.setImageResource(R.drawable.play_button)
                 isCancelled=false
                 WorkManager.getInstance(requireContext()).cancelUniqueWork("FirstWork")
-
-
-
-                isPlayButton=true
+//                isPlayButton=true
             }
         }
 
         binding.btnReset.setOnClickListener {
             isCancelled=true
-            isPlayButton=true
-            binding.ibPlayButton.setImageResource(R.drawable.play_button)
+//            isPlayButton=true
+//            binding.ibPlayButton.setImageResource(R.drawable.play_button)
             StopWatchWorker.workerLiveData.postValue(0)
             inputValue=0
+
             WorkManager.getInstance(requireContext()).cancelUniqueWork("FirstWork")
-
-
-
+            CoroutineScope(Dispatchers.IO).launch{
+                stopWatchViewModel.deleteLapItems()
+            }
 
         }
-        stopWatchAdapter= StopWatchAdapter()
+
+
+        binding.ivBackArrow.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         binding.btnLap.setOnClickListener {
 
-            idNo++
             lapTimer=binding.tvTimer.text.toString()
-            lapTimeItems.add(StopWatchLapItems(idNo,lapTimer))
-            stopWatchAdapter.submitList(lapTimeItems)
-            binding.rvLapItem.adapter=stopWatchAdapter
+            isReset= binding.rvLapItem.isEmpty()
+            if(!isPlayButton){
+                CoroutineScope(Dispatchers.IO).launch {
+                    stopWatchViewModel.insertLapItems(lapTimer,isReset)
+                }
+            }
+
+
+
+//            lapTimeItems.add(StopWatchLapItems(idNo,lapTimer))
+//            stopWatchAdapter.submitList(lapTimeItems)
+//            binding.rvLapItem.adapter=stopWatchAdapter
 
         }
+        binding.rvLapItem.adapter=stopWatchAdapter
 
         binding.rvLapItem.layoutManager=LinearLayoutManager(this.activity)
 
 
         return view
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -138,13 +166,19 @@ class StopWatchFragment :Fragment() {
             binding.tvTimer.text = time
         }
 
-
     }
+
+
+
+
 
 
     override fun onDestroy() {
         super.onDestroy()
         _binding=null
+
+
     }
+
 
 }
