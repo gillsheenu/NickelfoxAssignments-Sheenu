@@ -26,19 +26,20 @@ import java.util.*
 @AndroidEntryPoint
 class StopWatchFragment :Fragment() {
 
-    private  var _binding: FragmentStopWatchBinding? =null
+    private  var _binding: FragmentStopWatchBinding?=null
     private val binding get() = _binding!!
     private lateinit var stopWatchAdapter: StopWatchAdapter
 //    private lateinit var lapTimeItems:ArrayList<StopWatchLapItems>
     private lateinit var lapTimer:String
     private lateinit var stopWatchViewModel:StopWatchViewModel
-    var isReset:Boolean=false
+    private var isReset:Boolean=false
 
 
     companion object{
          var inputValue=0
          var isCancelled=true
          var isPlayButton:Boolean=true
+
 
      }
 
@@ -72,7 +73,7 @@ class StopWatchFragment :Fragment() {
         }
 
 
-        StopWatchWorker.updateLiveDagta.observe(viewLifecycleOwner) {
+        StopWatchWorker.updateLiveData.observe(viewLifecycleOwner) {
             if (!isCancelled) {
                 inputValue = it
                 StopWatchWorker.workerLiveData.postValue(it)

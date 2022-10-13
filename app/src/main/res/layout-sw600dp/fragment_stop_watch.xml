@@ -42,10 +42,11 @@
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="1:1"
         android:background="@drawable/stop_watch_gradient"
+        android:layout_marginTop="80dp"
         android:gravity="center"
         android:text="@string/_00_00"
         android:textColor="#FFFFFF"
-        android:textSize="30sp"
+        android:textSize="50sp"
         app:layout_constraintEnd_toStartOf="@id/guideline3"
         app:layout_constraintStart_toEndOf="@id/guideline2"
         app:layout_constraintTop_toBottomOf="@id/tvStopWatch"
@@ -60,7 +61,8 @@
         android:gravity="center"
         android:text="@string/stopwatch"
         android:textColor="#FFFF"
-        android:textSize="24sp"
+        android:textSize="45sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/gdHorizontalBottom"
         app:layout_constraintEnd_toStartOf="@id/guideline3"
         app:layout_constraintStart_toEndOf="@id/guideline2"
@@ -70,6 +72,7 @@
         android:id="@+id/rvLapItem"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toTopOf="@id/cvPlayButton"
         app:layout_constraintEnd_toStartOf="@id/guideline3"
         app:layout_constraintStart_toEndOf="@id/guideline2"
@@ -95,6 +98,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/stop_watch_button_bg"
+            android:layout_gravity="center"
+            android:textSize="35sp"
             android:text="@string/reset"
             android:textColor="#FFFFFF"
             app:backgroundTint="#202020" />
@@ -109,8 +114,8 @@
         app:cardCornerRadius="100dp"
         app:cardElevation="30dp"
         app:cardMaxElevation="35dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         app:layout_constraintBottom_toTopOf="@id/gdHorizontalBelow"
         app:layout_constraintTop_toBottomOf="@id/gdHorizontalUP"
         app:layout_constraintEnd_toStartOf="@id/cvLapButton"
@@ -118,8 +123,8 @@
         <ImageButton
 
             android:id="@+id/ibPlayButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center"
             android:backgroundTint="#202020"
             android:padding="15dp"
@@ -155,6 +160,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/stop_watch_button_bg"
             android:text="@string/lap"
+            android:textSize="35sp"
+            android:layout_gravity="center"
             android:textColor="#FFFFFF"
             app:backgroundTint="#202020" />
 
@@ -166,14 +173,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.20" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.80" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gdHorizontalTop"
@@ -187,7 +194,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.10" />
+        app:layout_constraintGuide_percent="0.12" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gdHorizontalUP"
