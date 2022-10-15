@@ -1,11 +1,13 @@
 package com.example.nickelffoxassignments_sheenu.stopwatch.ui.view
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isEmpty
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -16,6 +18,7 @@ import com.example.nickelffoxassignments_sheenu.databinding.FragmentStopWatchBin
 import com.example.nickelffoxassignments_sheenu.stopwatch.ui.adapter.StopWatchAdapter
 import com.example.nickelffoxassignments_sheenu.stopwatch.data.local.StopWatchWorker
 import com.example.nickelffoxassignments_sheenu.stopwatch.ui.viewmodel.StopWatchViewModel
+import com.example.nickelffoxassignments_sheenu.stopwatch.utils.StopWatchService
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -82,6 +85,9 @@ class StopWatchFragment :Fragment() {
                 inputValue = 0
                 StopWatchWorker.workerLiveData.postValue(0)
                 binding.ibPlayButton.setImageResource(R.drawable.play_button)
+                var intent = Intent(context,StopWatchService::class.java)
+                context?.stopService(intent)
+
 
 
 //                isPlayButton=true
@@ -96,7 +102,7 @@ class StopWatchFragment :Fragment() {
                 isCancelled=true
 
                 val stopWatchWorkRequest= OneTimeWorkRequestBuilder<StopWatchWorker>()
-                    .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+//                    .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
                     .setInputData(workDataOf("INPUT" to inputValue))
                     .build()
 //                binding.ibPlayButton.setImageResource(R.drawable.pause)
@@ -111,6 +117,12 @@ class StopWatchFragment :Fragment() {
             }
         }
 
+//        binding.ibPlayButton.setOnClickListener {
+//            if(isPlayButton){
+//
+//            }
+//        }
+
         binding.btnReset.setOnClickListener {
             isCancelled=true
 //            isPlayButton=true
@@ -118,7 +130,7 @@ class StopWatchFragment :Fragment() {
             StopWatchWorker.workerLiveData.postValue(0)
             inputValue=0
 
-            WorkManager.getInstance(requireContext()).cancelUniqueWork("FirstWork")
+            WorkManager.getInstance(requireContext()).cancelAllWork()
             CoroutineScope(Dispatchers.IO).launch{
                 stopWatchViewModel.deleteLapItems()
             }
