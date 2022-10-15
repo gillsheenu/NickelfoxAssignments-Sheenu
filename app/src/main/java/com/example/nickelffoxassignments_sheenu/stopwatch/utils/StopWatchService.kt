@@ -9,14 +9,9 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.work.ForegroundInfo
-import androidx.work.WorkManager
 import com.example.nickelffoxassignments_sheenu.R
-import com.example.nickelffoxassignments_sheenu.news.NewsApplication
 import com.example.nickelffoxassignments_sheenu.stopwatch.ui.view.StopWatchFragment
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
+
 
 class StopWatchService: Service() {
 
@@ -41,17 +36,17 @@ class StopWatchService: Service() {
 
         val cancelIntent=Intent(applicationContext,NotificationIntentService::class.java)
         cancelIntent.action="cancel"
-        val cancelPendingIntent=PendingIntent.getBroadcast(applicationContext,0,cancelIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+        val cancelPendingIntent=PendingIntent.getBroadcast(applicationContext,0,cancelIntent,PendingIntent.FLAG_IMMUTABLE)
 
         val playIntent=Intent(applicationContext,NotificationIntentService::class.java)
         playIntent.action = "play"
         playIntent.putExtra("INPUTVALUE",StopWatchFragment.inputValue)
-        val playPendingIntent=PendingIntent.getBroadcast(applicationContext,0,playIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+        val playPendingIntent=PendingIntent.getBroadcast(applicationContext,0,playIntent,PendingIntent.FLAG_IMMUTABLE)
 
         val pauseIntent=Intent(applicationContext,NotificationIntentService::class.java)
         pauseIntent.action = "pause"
         pauseIntent.putExtra("INPUTVALUE",StopWatchFragment.inputValue)
-        val pausePendingIntent=PendingIntent.getBroadcast(applicationContext,0,pauseIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+        val pausePendingIntent=PendingIntent.getBroadcast(applicationContext,0,pauseIntent,PendingIntent.FLAG_IMMUTABLE)
 
         val notification=NotificationCompat.Builder(applicationContext,"MyStopWatch")
             .setContentTitle("StopWatch")
