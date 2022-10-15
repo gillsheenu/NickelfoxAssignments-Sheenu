@@ -123,8 +123,8 @@
         <ImageButton
 
             android:id="@+id/ibPlayButton"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
             android:backgroundTint="#202020"
             android:padding="15dp"
@@ -201,7 +201,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".85" />
+        app:layout_constraintGuide_percent=".80" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gdHorizontalBelow"
