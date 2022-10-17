@@ -13,26 +13,25 @@
         android:id="@+id/ivBackArrow"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_marginEnd="15dp"
         android:contentDescription="@string/backArrow"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_arrow_back"
+        android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toTopOf="@id/gdHorizontalBottom"
+        app:layout_constraintEnd_toStartOf="@id/guideline2"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toStartOf="@id/tvStopWatch"
         app:layout_constraintTop_toBottomOf="@id/gdHorizontalTop" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="15dp"
         app:layout_constraintDimensionRatio="1:1"
         android:scaleType="centerCrop"
         android:contentDescription="@string/timerImage"
         android:src="@drawable/ic_timer"
-        app:layout_constraintStart_toEndOf="@id/tvStopWatch"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toEndOf="@id/guideline3"
         app:layout_constraintTop_toBottomOf="@id/gdHorizontalTop"
         app:layout_constraintBottom_toTopOf="@id/gdHorizontalBottom"/>
 
@@ -46,15 +45,17 @@
         android:text="@string/_00_00"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintEnd_toStartOf="@id/guideline3"
         app:layout_constraintStart_toEndOf="@id/guideline2"
         app:layout_constraintTop_toBottomOf="@id/tvStopWatch"
-        app:layout_constraintBottom_toTopOf="@id/rvLapItem"/>
+        app:layout_constraintBottom_toTopOf="@id/gdHorizontalUP"/>
 
 
     <TextView
         android:id="@+id/tvStopWatch"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:fontFamily="@font/sf_pro_regular"
         android:gravity="center"
@@ -70,10 +71,12 @@
         android:id="@+id/rvLapItem"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/cvPlayButton"
-        app:layout_constraintEnd_toStartOf="@id/guideline3"
-        app:layout_constraintStart_toEndOf="@id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/tvTimer" />
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/viewVerticalBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/gdHorizontalUP"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -86,7 +89,7 @@
         app:cardMaxElevation="60dp"
         app:layout_constraintBottom_toTopOf="@id/gdHorizontalBelow"
         app:layout_constraintTop_toBottomOf="@id/gdHorizontalUP"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/viewVerticalBar"
         app:layout_constraintEnd_toStartOf="@id/cvPlayButton">
 
 
@@ -109,8 +112,8 @@
         app:cardCornerRadius="100dp"
         app:cardElevation="30dp"
         app:cardMaxElevation="35dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toTopOf="@id/gdHorizontalBelow"
         app:layout_constraintTop_toBottomOf="@id/gdHorizontalUP"
         app:layout_constraintEnd_toStartOf="@id/cvLapButton"
@@ -144,7 +147,6 @@
         app:cardElevation="40dp"
         app:cardMaxElevation="60dp"
         app:layout_constraintTop_toBottomOf="@id/gdHorizontalUP"
-
         app:layout_constraintBottom_toTopOf="@id/gdHorizontalBelow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cvPlayButton">
@@ -166,14 +168,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.10" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.40" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gdHorizontalTop"
@@ -187,14 +189,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.10" />
+        app:layout_constraintGuide_percent="0.12" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gdHorizontalUP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".85" />
+        app:layout_constraintGuide_percent=".80" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gdHorizontalBelow"
@@ -202,6 +204,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.92" />
+    <View
+        android:id="@+id/viewVerticalBar"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toEndOf="@id/guideline3"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="70dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

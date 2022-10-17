@@ -45,6 +45,7 @@
         android:gravity="center"
         android:text="@string/_00_00"
         android:textColor="#FFFFFF"
+        android:layout_marginTop="100dp"
         android:textSize="30sp"
         app:layout_constraintEnd_toStartOf="@id/guideline3"
         app:layout_constraintStart_toEndOf="@id/guideline2"
@@ -59,8 +60,9 @@
         android:fontFamily="@font/sf_pro_regular"
         android:gravity="center"
         android:text="@string/stopwatch"
+        android:textStyle="bold"
         android:textColor="#FFFF"
-        android:textSize="24sp"
+        android:textSize="35sp"
         app:layout_constraintBottom_toTopOf="@id/gdHorizontalBottom"
         app:layout_constraintEnd_toStartOf="@id/guideline3"
         app:layout_constraintStart_toEndOf="@id/guideline2"
@@ -95,6 +97,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/stop_watch_button_bg"
+            android:textSize="35sp"
+            android:layout_gravity="center_vertical"
             android:text="@string/reset"
             android:textColor="#FFFFFF"
             app:backgroundTint="#202020" />
@@ -118,8 +122,8 @@
         <ImageButton
 
             android:id="@+id/ibPlayButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
             android:backgroundTint="#202020"
             android:padding="15dp"
@@ -154,6 +158,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/stop_watch_button_bg"
+            android:layout_gravity="center_vertical"
+            android:textSize="35dp"
             android:text="@string/lap"
             android:textColor="#FFFFFF"
             app:backgroundTint="#202020" />
@@ -166,14 +172,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.20" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.80" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gdHorizontalTop"
@@ -187,14 +193,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.10" />
+        app:layout_constraintGuide_percent="0.12" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gdHorizontalUP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".85" />
+        app:layout_constraintGuide_percent=".80" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gdHorizontalBelow"

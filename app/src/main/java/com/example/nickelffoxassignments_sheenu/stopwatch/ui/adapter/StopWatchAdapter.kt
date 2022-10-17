@@ -6,15 +6,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nickelffoxassignments_sheenu.databinding.StopwatchAdapterBinding
-import com.example.nickelffoxassignments_sheenu.stopwatch.data.local.StopWatchLapItems
+import com.example.nickelffoxassignments_sheenu.stopwatch.data.dao.StopWatchLapItems
 
 class StopWatchAdapter:ListAdapter<StopWatchLapItems,StopWatchAdapter.StopwatchViewHolder>(StopwatchDiffUtilCallback()) {
 
     class StopwatchViewHolder(private val binding:StopwatchAdapterBinding) :RecyclerView.ViewHolder(binding.root){
 
-        fun bind(item:StopWatchLapItems){
+        fun bind(item: StopWatchLapItems){
 
-           binding.tvIdLap.text=item.id.toString()
+           binding.tvIdLap.text=item.idSeq.toString()
             binding.tvTimeLap.text=item.time
         }
     }

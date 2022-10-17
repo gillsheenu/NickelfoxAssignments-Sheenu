@@ -60,4 +60,5 @@
     <string name="_00_00">00:00</string>
     <string name="idNo">idNo</string>
     <string name="timer_expression">timer expression</string>
+    <string name="pausebutton">pauseButton</string>
 </resources>

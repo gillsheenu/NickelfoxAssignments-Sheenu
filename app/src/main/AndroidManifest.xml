@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.nickelffoxassignments_sheenu">
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -16,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Starting"
         tools:targetApi="31">
+        <service android:name=".stopwatch.utils.StopWatchService"/>
+        <service android:name=".stopwatch.utils.TimerService"/>
+        <receiver android:name=".stopwatch.utils.NotificationIntentService"/>
         <activity
             android:name="com.example.nickelffoxassignments_sheenu.CoroutineActivity"
             android:exported="false" />
