@@ -18,7 +18,7 @@
         android:theme="@style/Theme.Starting"
         tools:targetApi="31">
         <service android:name=".stopwatch.utils.StopWatchService"/>
-
+        <service android:name=".stopwatch.utils.TimerService"/>
         <receiver android:name=".stopwatch.utils.NotificationIntentService"/>
         <activity
             android:name="com.example.nickelffoxassignments_sheenu.CoroutineActivity"

@@ -11,16 +11,18 @@ import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.example.nickelffoxassignments_sheenu.R
 import com.example.nickelffoxassignments_sheenu.stopwatch.ui.view.StopWatchFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class StopWatchService: Service() {
 
-      lateinit var notificationManager:NotificationManager
+      private lateinit var notificationManager:NotificationManager
     override fun onBind(p0: Intent?): IBinder? {
         TODO("Not yet implemented")
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+        createNotification()
 
           notificationManager=applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -28,30 +30,49 @@ class StopWatchService: Service() {
             createChannel()
         }
 
-        var time=intent.getStringExtra("UPDATED_TIME")
+        val time=intent.getStringExtra("UPDATED_TIME")
 
-        val pendingIntent= Intent(applicationContext, StopWatchFragment::class.java).let {
-            PendingIntent.getActivity(applicationContext, 0, it,PendingIntent.FLAG_IMMUTABLE)
-        }
+        val moveIntent= Intent(applicationContext, StopWatchFragment::class.java)
+
+           val movePendingIntent= if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                PendingIntent.getActivity(applicationContext, 0,moveIntent ,PendingIntent.FLAG_MUTABLE)
+            } else {
+               PendingIntent.getActivity(applicationContext, 0, moveIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+            }
+
+
 
         val cancelIntent=Intent(applicationContext,NotificationIntentService::class.java)
         cancelIntent.action="cancel"
-        val cancelPendingIntent=PendingIntent.getBroadcast(applicationContext,0,cancelIntent,PendingIntent.FLAG_IMMUTABLE)
+
+        val cancelPendingIntent= if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getBroadcast(applicationContext,0,cancelIntent,PendingIntent.FLAG_MUTABLE)
+        } else {
+            PendingIntent.getBroadcast(applicationContext,0,cancelIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+        }
+
 
         val playIntent=Intent(applicationContext,NotificationIntentService::class.java)
         playIntent.action = "play"
-        playIntent.putExtra("INPUTVALUE",StopWatchFragment.inputValue)
-        val playPendingIntent=PendingIntent.getBroadcast(applicationContext,0,playIntent,PendingIntent.FLAG_IMMUTABLE)
+        val playPendingIntent= if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getBroadcast(applicationContext,0,playIntent,PendingIntent.FLAG_MUTABLE)
+        } else {
+            PendingIntent.getBroadcast(applicationContext,0,playIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+        }
+
 
         val pauseIntent=Intent(applicationContext,NotificationIntentService::class.java)
         pauseIntent.action = "pause"
-        pauseIntent.putExtra("INPUTVALUE",StopWatchFragment.inputValue)
-        val pausePendingIntent=PendingIntent.getBroadcast(applicationContext,0,pauseIntent,PendingIntent.FLAG_IMMUTABLE)
+        val pausePendingIntent= if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getBroadcast(applicationContext,0,pauseIntent,PendingIntent.FLAG_MUTABLE)
+        } else {
+            PendingIntent.getBroadcast(applicationContext,0,pauseIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+        }
 
         val notification=NotificationCompat.Builder(applicationContext,"MyStopWatch")
             .setContentTitle("StopWatch")
             .setSmallIcon(R.drawable.stopwatch)
-            .setContentIntent(pendingIntent)
+            .setContentIntent(movePendingIntent)
             .setOnlyAlertOnce(true)
             .addAction(R.drawable.ic_cancel,"Cancel",cancelPendingIntent)
             .addAction(R.drawable.pause,"Pause",pausePendingIntent)
@@ -59,15 +80,18 @@ class StopWatchService: Service() {
             //.setWhen(System.currentTimeMillis())
             // .setUsesChronometer(true)
             .setContentText(time)
-            .setAutoCancel(false)
             .setOngoing(true)
             .build()
 //        notificationManager.notify(10001,notification)
 
         startForeground(10001,notification)
 
-        return START_NOT_STICKY
+        return START_STICKY
 
+
+    }
+
+    private fun createNotification() {
 
     }
 

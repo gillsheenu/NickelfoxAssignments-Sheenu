@@ -17,4 +17,15 @@ class StopWatchViewModel @Inject constructor(var repository:StopWatchRepository)
         repository.deleteLapItems()
     }
 
+    fun createStopWatchRequest(){
+        repository.createRequest()
+    }
+    fun pauseStopWatchRequest(){
+        repository.pauseRequest()
+    }
+
+    fun stopStopWatchRequest(){
+        repository.stopRequest()
+    }
+
 }
